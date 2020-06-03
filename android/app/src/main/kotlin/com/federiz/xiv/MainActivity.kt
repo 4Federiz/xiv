@@ -1,0 +1,6 @@
+package com.federiz.xiv
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}
