@@ -1,18 +1,22 @@
 //https://xivapi.com/docs
-//My character url: https://xivapi.com/character/search?name=Fed+Eriz&server=Adamantoise
 import 'package:flutter/material.dart';
 export 'f_f_fonts_icons.dart';
 
-final String kApiKey = '?private_key=dd7264709cc043678c0f79dec7a6325ec4089f637eec45278e083d957d11981c';
+final String kApiKey =
+    '?private_key=dd7264709cc043678c0f79dec7a6325ec4089f637eec45278e083d957d11981c';
 final String kUrl = 'https://xivapi.com/';
 final String kCharacter = 'character/';
 
-final kActiveColour = Color(0xFFFCA908);
-final kBackgroundColour = Color(0xFFEFEEEA);
+const kActiveColour = Color(0xFFFCA908);
+const kBackgroundColour = Color(0xFFEFEEEA);
 
-final kTheme = ThemeData.dark().copyWith(
-//  scaffoldBackgroundColor: kBackgroundColour,
-);
+const kHeroTagIntroScreen = 'IntroScreenTag';
+
+const kRouteCharacterScreen = '/Character';
+const kRouteWelcomeScreen = '/Welcome';
+const kRouteIntroScreen = '/';
+
+final kTheme = ThemeData.dark();
 
 List<String> kServers = [
   'Adamantoise',
