@@ -1,8 +1,9 @@
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:xiv/brains/url_handling.dart';
+import 'package:xiv/brains/xiv.dart';
 import 'package:xiv/consts/constants.dart';
 import 'package:xiv/widgets/dropdown_menu.dart';
 import 'package:xiv/widgets/flat_button.dart';
@@ -21,6 +22,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final xivModel = Provider.of<XIV>(context);
+
     ResponsiveWidgets.init(
       context,
       height: 1920, // Optional
@@ -67,16 +70,37 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     child: FButton(
                       text: '  Search',
                       toDo: () async {
-                        dynamic response = await widget.json.fetchData();
+                        kLoadingIndicator(context);
+                        print(xivModel.getServer);
+
+                        dynamic response = await widget.json
+                            .fetchData(textFieldValue, xivModel.getServer);
 
                         if (response.statusCode == 200) {
                           widget.jsonBody = response.body;
                           widget.decoder = jsonDecode(widget.jsonBody);
-                          print(textFieldValue);
-                          print(widget.decoder['Results'][0]['ID']);
-//                        Navigator.pushNamed(context, kRouteCharacterScreen);
+
+                          xivModel.setName =
+                              widget.decoder['Results'][0]['Name'];
+                          xivModel.setID = widget.decoder['Results'][0]['ID'];
+
+                          dynamic secondResponse =
+                              await widget.json.fetchAllData(xivModel.getID);
+                          if (secondResponse.statusCode == 200) {
+                            widget.jsonBody = secondResponse.body;
+                            widget.decoder = jsonDecode(widget.jsonBody);
+
+                            xivModel.setPortrait =
+                                widget.decoder['Character']['Portrait'];
+
+                            Navigator.pushNamed(context, kRouteCharacterScreen);
+                          } else {
+                            print('Error parsing data. Server may be wrong');
+                            Navigator.pop(context);
+                          }
                         } else {
-                          print('Error parsing data. URL may be wrong');
+                          print('Error parsing data. Name may be wrong');
+                          Navigator.pop(context);
                         }
                       },
                     ),
@@ -94,7 +118,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     width: double.maxFinite,
                     height: 1080,
                     heightResponsive: true,
-                    margin: EdgeInsets.only(left: 20, right:  20, bottom: 5),
+                    margin: EdgeInsets.only(left: 20, right: 20, bottom: 5),
                     color: Colors.grey,
                     child: Icon(FFFonts.SymbolQuestion),
                   ),

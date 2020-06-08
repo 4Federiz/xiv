@@ -1,11 +1,12 @@
-//https://xivapi.com/docs
 import 'package:flutter/material.dart';
+import 'package:progress_indicators/progress_indicators.dart';
+import 'package:xiv/consts/f_f_fonts_icons.dart';
 export 'f_f_fonts_icons.dart';
 
 final String kApiKey =
     '?private_key=dd7264709cc043678c0f79dec7a6325ec4089f637eec45278e083d957d11981c';
 final String kUrl = 'https://xivapi.com/';
-final String kCharacter = 'character/';
+final String kUrlDocs = 'https://xivapi.com/docs';
 
 const kActiveColour = Color(0xFFFCA908);
 const kBackgroundColour = Color(0xFFEFEEEA);
@@ -17,6 +18,23 @@ const kRouteWelcomeScreen = '/Welcome';
 const kRouteIntroScreen = '/';
 
 final kTheme = ThemeData.dark();
+
+void kLoadingIndicator(BuildContext context) {
+  showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext context) {
+      return Dialog(
+        child: GlowingProgressIndicator(
+          child: Icon(
+            FFFonts.app_payment_symbol,
+            size: 100,
+          ), //FadingText('Loading...'),
+        ),
+      );
+    },
+  );
+}
 
 List<String> kServers = [
   'Adamantoise',
