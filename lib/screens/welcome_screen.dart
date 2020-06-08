@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:xiv/brains/url_handling.dart';
@@ -16,6 +17,8 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
+  String textFieldValue;
+
   @override
   Widget build(BuildContext context) {
     ResponsiveWidgets.init(
@@ -27,69 +30,78 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
     return ResponsiveWidgets.builder(
         child: Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
-            ContainerResponsive(
-              margin: EdgeInsets.symmetric(horizontal: 15),
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  icon: Hero(
-                    tag: kHeroTagIntroScreen,
-                    child: Icon(
-                      FFFonts.FFXIVMeteo,
-                      size: 60,
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+              ContainerResponsive(
+                margin: EdgeInsets.symmetric(horizontal: 15),
+                padding: EdgeInsets.only(top: 30),
+                child: TextField(
+                  onChanged: (v) {
+                    textFieldValue = v;
+                  },
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    icon: Hero(
+                      tag: kHeroTagIntroScreen,
+                      child: Icon(
+                        FFFonts.FFXIVMeteo,
+                        size: 60,
+                      ),
+                    ),
+                    labelText: 'Character Name',
+                    hintText: '',
+                  ),
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  ContainerResponsive(
+                    margin: EdgeInsets.all(5),
+                    padding: EdgeInsets.only(left: 10),
+                    child: FButton(
+                      text: '  Search',
+                      toDo: () async {
+                        dynamic response = await widget.json.fetchData();
+
+                        if (response.statusCode == 200) {
+                          widget.jsonBody = response.body;
+                          widget.decoder = jsonDecode(widget.jsonBody);
+                          print(textFieldValue);
+                          print(widget.decoder['Results'][0]['ID']);
+//                        Navigator.pushNamed(context, kRouteCharacterScreen);
+                        } else {
+                          print('Error parsing data. URL may be wrong');
+                        }
+                      },
                     ),
                   ),
-                  labelText: 'Character Name',
-                  hintText: '',
-                ),
+                  VerticalDivider(),
+                  ContainerResponsive(
+                    margin: EdgeInsets.all(10),
+                    child: DropDownMenu(),
+                  ),
+                ],
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                ContainerResponsive(
-                  margin: EdgeInsets.all(5),
-                  padding: EdgeInsets.only(left: 10),
-                  child: FButton(
-                    text: '  Search',
-                    toDo: () async {
-                      dynamic response = await widget.json.fetchData();
-
-                      if (response.statusCode == 200) {
-                        widget.jsonBody = response.body;
-                        widget.decoder = jsonDecode(widget.jsonBody);
-                        print(widget.decoder['Results'][0]['ID']);
-//                        Navigator.pushNamed(context, kRouteCharacterScreen);
-                      } else {
-                        print('Error parsing data. URL may be wrong');
-                      }
-                    },
+              Flexible(
+                child: Center(
+                  child: ContainerResponsive(
+                    width: double.maxFinite,
+                    height: 1080,
+                    heightResponsive: true,
+                    margin: EdgeInsets.only(left: 20, right:  20, bottom: 5),
+                    color: Colors.grey,
+                    child: Icon(FFFonts.SymbolQuestion),
                   ),
                 ),
-                VerticalDivider(),
-                ContainerResponsive(
-                  margin: EdgeInsets.all(10),
-                  child: DropDownMenu(),
-                ),
-              ],
-            ),
-            Center(
-              child: ContainerResponsive(
-                width: double.maxFinite,
-                height: 1080,
-                heightResponsive: true,
-                margin: EdgeInsets.only(top: 10, left: 20, right:  20, bottom: 5),
-                color: Colors.grey,
-                child: Icon(FFFonts.SymbolQuestion),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     ));
