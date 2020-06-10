@@ -8,14 +8,26 @@ final String kApiKey =
 final String kUrl = 'https://xivapi.com/';
 final String kUrlDocs = 'https://xivapi.com/docs';
 
-const kActiveColour = Color(0xFFFCA908);
-const kBackgroundColour = Color(0xFFEFEEEA);
+const kActiveColour = Color.fromRGBO(64, 75, 96, 0.9);
+const kActiveColourDim = Color(0xFFEFEEEA);
+const kActiveColourAccent = Color.fromRGBO(65, 88, 128, 0.9);
+const kBackgroundColour = Colors.white24;
 
 const kHeroTagIntroScreen = 'IntroScreenTag';
 
 const kRouteCharacterScreen = '/Character';
 const kRouteWelcomeScreen = '/Welcome';
 const kRouteIntroScreen = '/';
+
+const kTextStyleBody = TextStyle(
+  color: kActiveColourDim,
+  fontWeight: FontWeight.bold,
+);
+
+const kTextStyleSub = TextStyle(
+  color: kActiveColourDim,
+  fontWeight: FontWeight.w200,
+);
 
 final kTheme = ThemeData.dark();
 
@@ -35,6 +47,21 @@ void kLoadingIndicator(BuildContext context) {
     },
   );
 }
+
+Map<String, String> kDeities = {
+  '1': 'Halone, The Fury',
+  '2': 'Menphina, The Lover',
+  '3': 'Thaliak, The Scholar',
+  '4': 'Nymeia, The Spinner',
+  '5': 'Llymlaen, The Navigator',
+  '6': 'Oschon, The Wanderer',
+  '7': 'Byregot, The Builder',
+  '8': 'Rhalgr, The Destroyer',
+  '9': 'Azeyma, The Warden',
+  '10': 'Nald\'thal, The Traders',
+  '11': 'Nophica, The Matron',
+  '12': 'Althyk, The Keeper',
+};
 
 List<String> kServers = [
   'Adamantoise',

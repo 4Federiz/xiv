@@ -71,8 +71,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         toDo: () async {
                           kLoadingIndicator(context);
 
-                          dynamic response = await widget.json
-                              .fetchData(textFieldValue.trim(), xivModel.getServer);
+                          dynamic response = await widget.json.fetchData(
+                              textFieldValue.trim(), xivModel.getServer);
 
                           if (response.statusCode == 200) {
                             widget.jsonBody = response.body;
@@ -82,16 +82,19 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                 widget.decoder['Results'][0]['Name'];
                             xivModel.setID = widget.decoder['Results'][0]['ID'];
 
-                            dynamic secondResponse =
-                                await widget.json.fetchAllDataCharacter(xivModel.getID);
+                            dynamic secondResponse = await widget.json
+                                .fetchAllDataCharacter(xivModel.getID);
                             if (secondResponse.statusCode == 200) {
                               widget.jsonBody = secondResponse.body;
                               widget.decoder = jsonDecode(widget.jsonBody);
 
                               xivModel.fillVarsCharacter(widget.decoder);
 
-                              Navigator.pushNamed(
-                                  context, kRouteCharacterScreen);
+                              Navigator.pushNamedAndRemoveUntil(
+                                context,
+                                kRouteCharacterScreen,
+                                (_) => false,
+                              );
                             } else {
                               print('Error parsing data. Server may be wrong');
                               Navigator.pop(context);

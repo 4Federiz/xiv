@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:xiv/brains/freecompany.dart';
 import 'package:xiv/brains/gear.dart';
+import 'package:xiv/consts/constants.dart';
 export 'package:xiv/brains/gear.dart';
 export 'package:xiv/brains/freecompany.dart';
 export 'package:xiv/brains/url_handling.dart';
@@ -28,13 +29,16 @@ class XIV with ChangeNotifier{
   set setFreeCompanyId(String u) =>  _freeCompanyId = u;
   get getFreeCompanyId => _freeCompanyId;
 
-  get getFreeCompany => _freeCompany;
+  ///TODO: Finish get de las FC
+  get getFreeCompanyActive => _freeCompany.getActive;
+  get getFreeCompanyActiveMemberCount => _freeCompany.getActiveMemberCount;
+  get getFreeCompanyName => _freeCompany.getName;
 
   set setGear(XIVGear u) =>  _gear = u;
   get getGear => _gear;
 
   set setGuardianDeity(int u) =>  _guardianDeity = u.toString();
-  get getGuardianDeity => _guardianDeity;
+  get getGuardianDeity => kDeities[_guardianDeity];
 
   set setNameDay(String u) =>  _nameDay = u;
   get getNameDay => _nameDay;
@@ -51,21 +55,21 @@ class XIV with ChangeNotifier{
   set setServer(String u) => _server = u;
   get getServer => _server;
 
-  get getPrintableInfo => 'Avatar: $getAvatar\nBio: $getBio\nFreeCompany: $getFreeCompanyId\n'
+  get getPrintableInfo => '\n\n--Character--\nAvatar: $getAvatar\nBio: $getBio\nFreeCompany: $getFreeCompanyId\n'
       'Gear:soon\nDeity: $getGuardianDeity\nID: $getID\nName: $getName\nNameDay: $getNameDay'
       '\nPortrait: $getPortrait\nServer: $getServer';
 
-  void fillVarsCharacter(Map<String, dynamic> map) {
+  void fillVarsCharacter(Map<String, dynamic> map) async {
     this._avatar = map['Character']['Avatar'];
     this._bio = map['Character']['Bio'];
     this._freeCompanyId = map['Character']['FreeCompanyId'];
-//    this._freeCompany = XIVFreeCompany(this._freeCompanyId);
     ///TODO: this._gear
     this._guardianDeity = map['Character']['GuardianDeity'].toString();
     this._nameDay = map['Character']['Nameday'];
     this._portrait = map['Character']['Portrait'];
     this._server = map['Character']['Server'];
-
+    this._freeCompany = XIVFreeCompany(this._freeCompanyId);
+    await this._freeCompany.fillVarsFC();
     notifyListeners();
   }
 }
