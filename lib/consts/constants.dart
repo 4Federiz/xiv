@@ -15,6 +15,7 @@ const kBackgroundColour = Colors.white24;
 
 const kHeroTagIntroScreen = 'IntroScreenTag';
 
+const kRouteFreeCompanyScreen = '/FC';
 const kRouteCharacterScreen = '/Character';
 const kRouteWelcomeScreen = '/Welcome';
 const kRouteIntroScreen = '/';

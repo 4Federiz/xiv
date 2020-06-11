@@ -1,30 +1,22 @@
-import 'dart:convert';
-import 'package:flutter/material.dart';
-import 'package:xiv/brains/url_handling.dart';
-
-class XIVFreeCompany with ChangeNotifier{
-  /// https://xivapi.com/freecompany/9233645873504816758
-
-  UrlHandling json = UrlHandling();
-  String jsonBody;
-  Map<String, dynamic> decoder;
-
+class XIVFreeCompany {
   String _active;
+  List<dynamic> _crest;
   String _activeMemberCount;
   String _estateName;
-  Map<String, String> _estate;  ///TODO: Change this into two strings
+  String _estateGreeting;
+  String _estatePlot;
   String _grandCompany;
-  String _id;
   String _name;
-  String _rank;
   String _server;
+  String _rank;
   String _slogan;
   String _tag;
 
-  XIVFreeCompany(this._id);
-
   set setActive(String u) => _active = u;
   get getActive => _active;
+
+  set setCrest(List<dynamic> u) => _crest = u;
+  get getCrest => _crest;
 
   set setActiveMemberCount(int u) => _activeMemberCount = u.toString();
   get getActiveMemberCount => _activeMemberCount;
@@ -32,8 +24,11 @@ class XIVFreeCompany with ChangeNotifier{
   set setEstateName(String u) => _estateName = u;
   get getEstateName => _estateName;
 
-  set setEstate(Map<String, String> u) => _estate = u;
-  get getEstate => _estate;
+  set setEstateGreeting(String u) => _estateGreeting = u;
+  get getEstateGreeting => _estateGreeting;
+
+  set setEstatePlot(String u) => _estatePlot = u;
+  get getEstatePlot => _estatePlot;
 
   set setGrandCompany(String u) => _grandCompany = u;
   get getGrandCompany => _grandCompany;
@@ -52,31 +47,4 @@ class XIVFreeCompany with ChangeNotifier{
 
   set setTag(String u) => _tag = u;
   get getTag => _tag;
-
-  Future fillVarsFC() async {
-    dynamic response = await json.fetchAllDataFreeCompany(this._id);
-    if (response.statusCode == 200) {
-      jsonBody = response.body;
-      decoder = jsonDecode(jsonBody);
-
-      setActive = decoder['FreeCompany']['Active'];
-      setActiveMemberCount = decoder['FreeCompany']['ActiveMemberCount'];
-      setEstateName = decoder['FreeCompany']['Estate']['Name'];
-
-//      setEstate = {
-//        decoder['FreeCompany']['Estate']['Plot'],
-//        decoder['FreeCompany']['Estate']['Greeting']
-//      } as Map<String, String>;
-
-      setGrandCompany = decoder['FreeCompany']['GrandCompany'];
-      setName = decoder['FreeCompany']['Name'];
-      setRank = decoder['FreeCompany']['Rank'];
-      setServer = decoder['FreeCompany']['Server'];
-      setSlogan = decoder['FreeCompany']['Slogan'];
-      setTag = decoder['FreeCompany']['Tag'];
-      notifyListeners();
-    } else {
-      print('Error parsing FC data.');
-    }
-  }
 }

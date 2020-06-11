@@ -90,6 +90,21 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
                               xivModel.fillVarsCharacter(widget.decoder);
 
+                              if (xivModel.getFreeCompanyId.isNotEmpty) {
+                                dynamic thirdResponse = await widget.json
+                                    .fetchAllDataFreeCompany(
+                                        xivModel.getFreeCompanyId);
+                                if (thirdResponse.statusCode == 200) {
+                                  widget.jsonBody = thirdResponse.body;
+                                  widget.decoder = jsonDecode(widget.jsonBody);
+                                  xivModel.fillVarsFC(widget.decoder);
+                                } else {
+                                  xivModel.setFreeCompanyName = 'Free Agent';
+                                }
+                              } else {
+                                print('Error parsing FC data.');
+                              }
+
                               Navigator.pushNamedAndRemoveUntil(
                                 context,
                                 kRouteCharacterScreen,

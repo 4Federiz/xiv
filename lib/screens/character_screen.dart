@@ -50,13 +50,12 @@ class _CharacterScreenState extends State<CharacterScreen> {
                   ),
                 ),
                 SliverList(
-//                  itemExtent: 100,
                   delegate: SliverChildListDelegate(
                     [
                       CContainer(body: '${xivModel.getName}',sub: 'Player ID: ${xivModel.getID}', icon: FFFonts.app_character_info),
                       CContainer(body: 'Biography',sub: '${xivModel.getBio}', icon: FFFonts.app_notification_notices),
-                      CContainer.colour(body: 'FreeCompany',sub: '${xivModel.getFreeCompanyName}', icon: FFFonts.app_group, color: kActiveColourAccent, activeOnPress: true), ///TODO: routeName => FC screen
-                      CContainer(body: 'Guardian',sub: '${xivModel.getGuardianDeity}', icon: FFFonts.ItemCategory_Crystal),
+                      CContainer.colour(body: 'FreeCompany',sub: '${xivModel.getFreeCompanyName}', icon: FFFonts.app_group, color: kActiveColourAccent, activeOnPress: true, routeName: kRouteFreeCompanyScreen),
+                      CContainer.colour(body: 'Gear',sub: 'soon', icon: FFFonts.ArmoryChest, color: kActiveColourAccent, activeOnPress: true, routeName: kRouteFreeCompanyScreen), ///TODO: routeName => Gear screen
                       ContainerResponsive(
                         heightResponsive: true,
                         padding: EdgeInsets.symmetric(horizontal: 12),
@@ -65,8 +64,8 @@ class _CharacterScreenState extends State<CharacterScreen> {
                           fit: BoxFit.contain,
                         ),
                       ),
-                      CContainer.colour(body: 'Gear',sub: 'soon', icon: FFFonts.ArmoryChest, color: kActiveColourAccent), ///TODO: routeName => Gear screen
                       CContainer(body: 'Birthday',sub: '${xivModel.getNameDay}', icon: FFFonts.Schedule),
+                      CContainer(body: 'Guardian',sub: '${xivModel.getGuardianDeity}', icon: FFFonts.ItemCategory_Crystal),
                     ],
                   ),
                 ),

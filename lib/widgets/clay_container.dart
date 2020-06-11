@@ -20,6 +20,7 @@ class CContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Card(
       elevation: 10,
       margin: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
@@ -49,15 +50,15 @@ class CContainer extends StatelessWidget {
         ),
       ),
       title: Text('$body', style: kTextStyleBody),
-      subtitle: Text('$sub', style: kTextStyleSub),
+      subtitle: Text('\t$sub', style: kTextStyleSub),
 //      trailing: Icon(icon, color: kBackgroundColour, size: 30),
       onTap: () {
-        if (!activeOnPress) {
-          ///TODO: Implement Copy info to clipboard?
-        } else if (activeOnPress) {
-          print(activeOnPress);
-//          Navigator.pushNamed(context, routeName);
+        if (activeOnPress) {
+          Navigator.pushNamed(context, routeName);
         }
+      },
+      onLongPress: () {
+        ///TODO: Implement Copy info to clipboard?
       },
     );
   }

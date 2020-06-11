@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:xiv/brains/xiv.dart';
 import 'package:xiv/consts/constants.dart';
 import 'package:xiv/screens/character_screen.dart';
+import 'package:xiv/screens/freecompany_screen.dart';
 import 'package:xiv/screens/intro_screen.dart';
 import 'package:xiv/screens/welcome_screen.dart';
 
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
           kRouteIntroScreen: (context) => IntroScreen(),
           kRouteWelcomeScreen: (context) => WelcomeScreen(),
           kRouteCharacterScreen: (context) => CharacterScreen(),
+          kRouteFreeCompanyScreen: (context) => FreeCompanyScreen(),
         },
       ),
     );
