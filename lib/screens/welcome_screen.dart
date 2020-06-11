@@ -90,7 +90,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
                               xivModel.fillVarsCharacter(widget.decoder);
 
-                              if (xivModel.getFreeCompanyId.isNotEmpty) {
+                              if (xivModel.getFreeCompanyId != null) {
                                 dynamic thirdResponse = await widget.json
                                     .fetchAllDataFreeCompany(
                                         xivModel.getFreeCompanyId);
@@ -98,11 +98,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                   widget.jsonBody = thirdResponse.body;
                                   widget.decoder = jsonDecode(widget.jsonBody);
                                   xivModel.fillVarsFC(widget.decoder);
-                                } else {
-                                  xivModel.setFreeCompanyName = 'Free Agent';
                                 }
                               } else {
-                                print('Error parsing FC data.');
+                                xivModel.setFreeCompanyName = 'Not enlisted in a FC';
                               }
 
                               Navigator.pushNamedAndRemoveUntil(

@@ -71,8 +71,6 @@ class XIV with ChangeNotifier {
     this._avatar = map['Character']['Avatar'];
     this._bio = map['Character']['Bio'];
     this._freeCompanyId = map['Character']['FreeCompanyId'];
-
-    ///TODO: this._gear
     this._guardianDeity = map['Character']['GuardianDeity'].toString();
     this._nameDay = map['Character']['Nameday'];
     this._portrait = map['Character']['Portrait'];
