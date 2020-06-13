@@ -14,7 +14,9 @@ const kActiveColourAccent = Color.fromRGBO(65, 88, 128, 0.9);
 const kBackgroundColour = Colors.white24;
 
 const kHeroTagIntroScreen = 'IntroScreenTag';
+const kHeroTagPortrait = 'PortraitTag';
 
+const kRouteGearScreen = '/Gear';
 const kRouteFreeCompanyScreen = '/FC';
 const kRouteCharacterScreen = '/Character';
 const kRouteWelcomeScreen = '/Welcome';

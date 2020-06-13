@@ -74,13 +74,16 @@ class _CharacterScreenState extends State<CharacterScreen> {
                       CContainer(body: '${xivModel.getName}',sub: 'Player ID: ${xivModel.getID}', icon: FFFonts.app_character_info),
                       CContainer(body: 'Biography',sub: '${xivModel.getBio}', icon: FFFonts.app_notification_notices),
                       freeCompanyCContainer(),
-                      CContainer.colour(body: 'Gear',sub: 'soon', icon: FFFonts.ArmoryChest, color: kActiveColourAccent, activeOnPress: true, routeName: kRouteFreeCompanyScreen), ///TODO: routeName => Gear screen
-                      ContainerResponsive(
-                        heightResponsive: true,
-                        padding: EdgeInsets.symmetric(horizontal: 12),
-                        child: Image.network(
-                          '${xivModel.getPortrait}',
-                          fit: BoxFit.contain,
+                      CContainer.colour(body: 'Gear',sub: 'soon', icon: FFFonts.ArmoryChest, color: kActiveColourAccent, activeOnPress: true, routeName: kRouteGearScreen),
+                      Hero(
+                        tag: kHeroTagPortrait,
+                        child: ContainerResponsive(
+                          heightResponsive: true,
+                          padding: EdgeInsets.symmetric(horizontal: 12),
+                          child: Image.network(
+                            '${xivModel.getPortrait}',
+                            fit: BoxFit.contain,
+                          ),
                         ),
                       ),
                       CContainer(body: 'Birthday',sub: '${xivModel.getNameDay}', icon: FFFonts.Schedule),

@@ -10,14 +10,27 @@ class XIV with ChangeNotifier {
   String _avatar;
   String _bio;
   String _freeCompanyId;
-  XIVFreeCompany _freeCompany = XIVFreeCompany();
-  XIVGear _gear;
   String _guardianDeity;
   String _id;
   String _name;
   String _nameDay;
   String _portrait;
   String _server;
+
+  XIVFreeCompany _freeCompany = XIVFreeCompany();
+
+  XIVGear _gearBody = XIVGear();
+  XIVGear _gearBracelets = XIVGear();
+  XIVGear _gearEarrings = XIVGear();
+  XIVGear _gearFeet = XIVGear();
+  XIVGear _gearHands = XIVGear();
+  XIVGear _gearHead = XIVGear();
+  XIVGear _gearLegs = XIVGear();
+  XIVGear _gearMainHand = XIVGear();
+  XIVGear _gearNecklace = XIVGear();
+  XIVGear _gearRing1 = XIVGear();
+  XIVGear _gearRing2 = XIVGear();
+  XIVGear _gearWaist = XIVGear();
 
   set setAvatar(String u) => _avatar = u;
   get getAvatar => _avatar;
@@ -41,8 +54,65 @@ class XIV with ChangeNotifier {
   get getFreeCompanyTag => _freeCompany.getTag;
   get getFreeCompanySlogan => _freeCompany.getSlogan;
 
-  set setGear(XIVGear u) => _gear = u;
-  get getGear => _gear;
+  get getGearBodyCreator => _gearBody.getCreator;
+  get getGearBodyDye => _gearBody.getDye;
+  get getGearBodyID => _gearBody.getID;
+  get getGearBodyMateria => _gearBody.getMateria;
+
+  get getGearBraceletsCreator => _gearBracelets.getCreator;
+  get getGearBraceletsDye => _gearBracelets.getDye;
+  get getGearBraceletsID => _gearBracelets.getID;
+  get getGearBraceletsMateria => _gearBracelets.getMateria;
+
+  get getGearEarringsCreator => _gearEarrings.getCreator;
+  get getGearEarringsDye => _gearEarrings.getDye;
+  get getGearEarringsID => _gearEarrings.getID;
+  get getGearEarringsMateria => _gearEarrings.getMateria;
+
+  get getGearFeetCreator => _gearFeet.getCreator;
+  get getGearFeetDye => _gearFeet.getDye;
+  get getGearFeetID => _gearFeet.getID;
+  get getGearFeetMateria => _gearFeet.getMateria;
+
+  get getGearHandsCreator => _gearHands.getCreator;
+  get getGearHandsDye => _gearHands.getDye;
+  get getGearHandsID => _gearHands.getID;
+  get getGearHandsMateria => _gearHands.getMateria;
+
+  get getGearHeadCreator => _gearHead.getCreator;
+  get getGearHeadDye => _gearHead.getDye;
+  get getGearHeadID => _gearHead.getID;
+  get getGearHeadMateria => _gearHead.getMateria;
+
+  get getGearLegsCreator => _gearLegs.getCreator;
+  get getGearLegsDye => _gearLegs.getDye;
+  get getGearLegsID => _gearLegs.getID;
+  get getGearLegsMateria => _gearLegs.getMateria;
+
+  get getGearMainHandCreator => _gearMainHand.getCreator;
+  get getGearMainHandDye => _gearMainHand.getDye;
+  get getGearMainHandID => _gearMainHand.getID;
+  get getGearMainHandMateria => _gearMainHand.getMateria;
+
+  get getGearNecklaceCreator => _gearNecklace.getCreator;
+  get getGearNecklaceDye => _gearNecklace.getDye;
+  get getGearNecklaceID => _gearNecklace.getID;
+  get getGearNecklaceMateria => _gearNecklace.getMateria;
+
+  get getGearRing1Creator => _gearRing1.getCreator;
+  get getGearRing1Dye => _gearRing1.getDye;
+  get getGearRing1ID => _gearRing1.getID;
+  get getGearRing1Materia => _gearRing1.getMateria;
+
+  get getGearRing2Creator => _gearRing2.getCreator;
+  get getGearRing2Dye => _gearRing2.getDye;
+  get getGearRing2ID => _gearRing2.getID;
+  get getGearRing2Materia => _gearRing2.getMateria;
+
+  get getGearWaistCreator => _gearWaist.getCreator;
+  get getGearWaistDye => _gearWaist.getDye;
+  get getGearWaistID => _gearWaist.getID;
+  get getGearWaistMateria => _gearWaist.getMateria;
 
   set setGuardianDeity(int u) => _guardianDeity = u.toString();
   get getGuardianDeity => kDeities[_guardianDeity];
@@ -75,6 +145,7 @@ class XIV with ChangeNotifier {
     this._nameDay = map['Character']['Nameday'];
     this._portrait = map['Character']['Portrait'];
     this._server = map['Character']['Server'];
+    fillVarsGear(map);
     notifyListeners();
   }
 
@@ -92,6 +163,70 @@ class XIV with ChangeNotifier {
     _freeCompany.setServer = decoder['FreeCompany']['Server'];
     _freeCompany.setSlogan = decoder['FreeCompany']['Slogan'];
     _freeCompany.setTag = decoder['FreeCompany']['Tag'];
+    notifyListeners();
+  }
+
+  void fillVarsGear(Map<String, dynamic> decoder) {
+    /// https://xivapi.com/item/29427
+    _gearBody.setCreator = decoder['Character']['GearSet']['Gear']['Body']['Creator'];
+    _gearBody.setDye = decoder['Character']['GearSet']['Gear']['Body']['Dye'];
+    _gearBody.setID = decoder['Character']['GearSet']['Gear']['Body']['ID'];
+    _gearBody.setMateria = decoder['Character']['GearSet']['Gear']['Body']['Materia'];
+
+    _gearBracelets.setCreator = decoder['Character']['GearSet']['Gear']['Bracelets']['Creator'];
+    _gearBracelets.setDye = decoder['Character']['GearSet']['Gear']['Bracelets']['Dye'];
+    _gearBracelets.setID = decoder['Character']['GearSet']['Gear']['Bracelets']['ID'];
+    _gearBracelets.setMateria = decoder['Character']['GearSet']['Gear']['Bracelets']['Materia'];
+
+    _gearEarrings.setCreator = decoder['Character']['GearSet']['Gear']['Earrings']['Creator'];
+    _gearEarrings.setDye = decoder['Character']['GearSet']['Gear']['Earrings']['Dye'];
+    _gearEarrings.setID = decoder['Character']['GearSet']['Gear']['Earrings']['ID'];
+    _gearEarrings.setMateria = decoder['Character']['GearSet']['Gear']['Earrings']['Materia'];
+
+    _gearFeet.setCreator = decoder['Character']['GearSet']['Gear']['Feet']['Creator'];
+    _gearFeet.setDye = decoder['Character']['GearSet']['Gear']['Feet']['Dye'];
+    _gearFeet.setID = decoder['Character']['GearSet']['Gear']['Feet']['ID'];
+    _gearFeet.setMateria = decoder['Character']['GearSet']['Gear']['Feet']['Materia'];
+
+    _gearHands.setCreator = decoder['Character']['GearSet']['Gear']['Hands']['Creator'];
+    _gearHands.setDye = decoder['Character']['GearSet']['Gear']['Hands']['Dye'];
+    _gearHands.setID = decoder['Character']['GearSet']['Gear']['Hands']['ID'];
+    _gearHands.setMateria = decoder['Character']['GearSet']['Gear']['Hands']['Materia'];
+
+    _gearHead.setCreator = decoder['Character']['GearSet']['Gear']['Head']['Creator'];
+    _gearHead.setDye = decoder['Character']['GearSet']['Gear']['Head']['Dye'];
+    _gearHead.setID = decoder['Character']['GearSet']['Gear']['Head']['ID'];
+    _gearHead.setMateria = decoder['Character']['GearSet']['Gear']['Head']['Materia'];
+
+    _gearLegs.setCreator = decoder['Character']['GearSet']['Gear']['Legs']['Creator'];
+    _gearLegs.setDye = decoder['Character']['GearSet']['Gear']['Legs']['Dye'];
+    _gearLegs.setID = decoder['Character']['GearSet']['Gear']['Legs']['ID'];
+    _gearLegs.setMateria = decoder['Character']['GearSet']['Gear']['Legs']['Materia'];
+
+    _gearMainHand.setCreator = decoder['Character']['GearSet']['Gear']['MainHand']['Creator'];
+    _gearMainHand.setDye = decoder['Character']['GearSet']['Gear']['MainHand']['Dye'];
+    _gearMainHand.setID = decoder['Character']['GearSet']['Gear']['MainHand']['ID'];
+    _gearMainHand.setMateria = decoder['Character']['GearSet']['Gear']['MainHand']['Materia'];
+
+    _gearNecklace.setCreator = decoder['Character']['GearSet']['Gear']['Necklace']['Creator'];
+    _gearNecklace.setDye = decoder['Character']['GearSet']['Gear']['Necklace']['Dye'];
+    _gearNecklace.setID = decoder['Character']['GearSet']['Gear']['Necklace']['ID'];
+    _gearNecklace.setMateria = decoder['Character']['GearSet']['Gear']['Necklace']['Materia'];
+
+    _gearRing1.setCreator = decoder['Character']['GearSet']['Gear']['Ring1']['Creator'];
+    _gearRing1.setDye = decoder['Character']['GearSet']['Gear']['Ring1']['Dye'];
+    _gearRing1.setID = decoder['Character']['GearSet']['Gear']['Ring1']['ID'];
+    _gearRing1.setMateria = decoder['Character']['GearSet']['Gear']['Ring1']['Materia'];
+
+    _gearRing2.setCreator = decoder['Character']['GearSet']['Gear']['Ring2']['Creator'];
+    _gearRing2.setDye = decoder['Character']['GearSet']['Gear']['Ring2']['Dye'];
+    _gearRing2.setID = decoder['Character']['GearSet']['Gear']['Ring2']['ID'];
+    _gearRing2.setMateria = decoder['Character']['GearSet']['Gear']['Ring2']['Materia'];
+
+    _gearWaist.setCreator = decoder['Character']['GearSet']['Gear']['Waist']['Creator'];
+    _gearWaist.setDye = decoder['Character']['GearSet']['Gear']['Waist']['Dye'];
+    _gearWaist.setID = decoder['Character']['GearSet']['Gear']['Waist']['ID'];
+    _gearWaist.setMateria = decoder['Character']['GearSet']['Gear']['Waist']['Materia'];
     notifyListeners();
   }
 }
