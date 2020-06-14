@@ -7,6 +7,7 @@ class CContainer extends StatelessWidget {
   IconData icon;
   Color color;
   bool activeOnPress = false;
+  bool activeInfo = false;
   String routeName;
 
   CContainer({this.icon, this.body, this.sub});
@@ -17,10 +18,10 @@ class CContainer extends StatelessWidget {
       this.color,
       this.activeOnPress = true,
       this.routeName});
+  CContainer.info({this.icon, this.body, this.sub, this.activeInfo = true});
 
   @override
   Widget build(BuildContext context) {
-
     return Card(
       elevation: 10,
       margin: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
@@ -39,9 +40,11 @@ class CContainer extends StatelessWidget {
       leading: Container(
         padding: EdgeInsets.only(right: 12),
         decoration: BoxDecoration(
-          border: Border(
-            right: BorderSide(width: 1, color: Colors.white24),
-          ),
+          border: !activeInfo
+              ? Border(right: BorderSide(width: 1, color: Colors.white24))
+              : Border(
+                  right: BorderSide(width: 1, color: Colors.transparent),
+                ),
         ),
         child: Icon(
           icon,
@@ -49,7 +52,9 @@ class CContainer extends StatelessWidget {
           size: 40,
         ),
       ),
-      title: Text('$body', style: kTextStyleBody),
+      title: activeInfo
+          ? Text('$body', style: kTextStyleInfo)
+          : Text('$body', style: kTextStyleBody),
       subtitle: Text('\t$sub', style: kTextStyleSub),
 //      trailing: Icon(icon, color: kBackgroundColour, size: 30),
       onTap: () {

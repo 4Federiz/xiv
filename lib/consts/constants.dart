@@ -6,6 +6,7 @@ export 'f_f_fonts_icons.dart';
 final String kApiKey =
     '?private_key=dd7264709cc043678c0f79dec7a6325ec4089f637eec45278e083d957d11981c';
 final String kUrl = 'https://xivapi.com/';
+final String kUrlNoDash = 'https://xivapi.com';
 final String kUrlDocs = 'https://xivapi.com/docs';
 
 const kActiveColour = Color.fromRGBO(64, 75, 96, 0.9);
@@ -30,6 +31,12 @@ const kTextStyleBody = TextStyle(
 const kTextStyleSub = TextStyle(
   color: kActiveColourDim,
   fontWeight: FontWeight.w200,
+);
+
+const kTextStyleInfo = TextStyle(
+  color: kActiveColourDim,
+  fontWeight: FontWeight.w700,
+  fontSize: 25,
 );
 
 final kTheme = ThemeData.dark();

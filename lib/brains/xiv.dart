@@ -139,7 +139,9 @@ class XIV with ChangeNotifier {
   get getServer => _server;
 
   get getItemID => _item.getItemID;
+  get getItemName => _item.getItemName;
   get getItemJob => _item.getItemJob;
+  get getItemIcon => _item.getItemIcon;
 
   get getPrintableInfo =>
       '\n\n--Character--\nAvatar: $getAvatar\nBio: $getBio\nFreeCompany: $getFreeCompanyId\n'
@@ -251,7 +253,9 @@ class XIV with ChangeNotifier {
       jsonBody = response.body;
       decoder = jsonDecode(jsonBody);
     this._item.setItemID = itemID;
+      this._item.setItemName = decoder['Name'];
     this._item.setItemJob = decoder['ClassJobCategory']['Name'];
+    this._item.setItemIcon = decoder['Icon'];
     notifyListeners();
     }
   }
