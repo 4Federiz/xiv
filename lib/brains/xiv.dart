@@ -1,9 +1,13 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:xiv/brains/freecompany.dart';
 import 'package:xiv/brains/gear.dart';
+import 'package:xiv/brains/item.dart';
+import 'package:xiv/brains/url_handling.dart';
 import 'package:xiv/consts/constants.dart';
 export 'package:xiv/brains/gear.dart';
 export 'package:xiv/brains/freecompany.dart';
+export 'package:xiv/brains/item.dart';
 export 'package:xiv/brains/url_handling.dart';
 
 class XIV with ChangeNotifier {
@@ -31,6 +35,8 @@ class XIV with ChangeNotifier {
   XIVGear _gearRing1 = XIVGear();
   XIVGear _gearRing2 = XIVGear();
   XIVGear _gearWaist = XIVGear();
+
+  XIVItem _item = XIVItem();
 
   set setAvatar(String u) => _avatar = u;
   get getAvatar => _avatar;
@@ -132,6 +138,9 @@ class XIV with ChangeNotifier {
   set setServer(String u) => _server = u;
   get getServer => _server;
 
+  get getItemID => _item.getItemID;
+  get getItemJob => _item.getItemJob;
+
   get getPrintableInfo =>
       '\n\n--Character--\nAvatar: $getAvatar\nBio: $getBio\nFreeCompany: $getFreeCompanyId\n'
       'Gear:soon\nDeity: $getGuardianDeity\nID: $getID\nName: $getName\nNameDay: $getNameDay'
@@ -207,6 +216,7 @@ class XIV with ChangeNotifier {
     _gearMainHand.setDye = decoder['Character']['GearSet']['Gear']['MainHand']['Dye'];
     _gearMainHand.setID = decoder['Character']['GearSet']['Gear']['MainHand']['ID'];
     _gearMainHand.setMateria = decoder['Character']['GearSet']['Gear']['MainHand']['Materia'];
+    fillVarsItem(_gearMainHand.getID);
 
     _gearNecklace.setCreator = decoder['Character']['GearSet']['Gear']['Necklace']['Creator'];
     _gearNecklace.setDye = decoder['Character']['GearSet']['Gear']['Necklace']['Dye'];
@@ -228,5 +238,21 @@ class XIV with ChangeNotifier {
     _gearWaist.setID = decoder['Character']['GearSet']['Gear']['Waist']['ID'];
     _gearWaist.setMateria = decoder['Character']['GearSet']['Gear']['Waist']['Materia'];
     notifyListeners();
+  }
+
+  void fillVarsItem(String itemID) async {
+    UrlHandling json = UrlHandling();
+    String jsonBody;
+    Map<String, dynamic> decoder;
+
+    dynamic response = await json.fetchAllDataItem(itemID);
+
+    if (response.statusCode == 200) {
+      jsonBody = response.body;
+      decoder = jsonDecode(jsonBody);
+    this._item.setItemID = itemID;
+    this._item.setItemJob = decoder['ClassJobCategory']['Name'];
+    notifyListeners();
+    }
   }
 }

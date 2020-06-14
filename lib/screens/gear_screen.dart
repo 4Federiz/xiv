@@ -14,6 +14,8 @@ class _GearScreenState extends State<GearScreen> {
   @override
   Widget build(BuildContext context) {
     final xivModel = Provider.of<XIV>(context);
+    String job = xivModel.getItemJob;
+    job = job.substring(job.length - 3);
 
     ResponsiveWidgets.init(
       context,
@@ -36,7 +38,7 @@ class _GearScreenState extends State<GearScreen> {
           body: SafeArea(
             child: Center(
               child: Text(
-                xivModel.getGearBraceletsID,
+                job,
                 style: kTextStyleBody,
               ),
             ),

@@ -12,4 +12,8 @@ class UrlHandling {
   Future fetchAllDataFreeCompany(String freeCompanyID) async {
     return await http.get('https://xivapi.com/freecompany/' + freeCompanyID);
   }
+
+  Future fetchAllDataItem(String itemID) async {
+    return await http.get('https://xivapi.com/item/' + itemID);
+  }
 }

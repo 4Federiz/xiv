@@ -11,9 +11,12 @@ class CharacterScreen extends StatefulWidget {
 }
 
 class _CharacterScreenState extends State<CharacterScreen> {
+
   @override
   Widget build(BuildContext context) {
     final xivModel = Provider.of<XIV>(context);
+    String job = xivModel.getItemJob;
+    job = job.substring(job.length - 3);
 
     ResponsiveWidgets.init(
       context,
@@ -59,11 +62,21 @@ class _CharacterScreenState extends State<CharacterScreen> {
                     background: ContainerResponsive(
                       padding: EdgeInsets.only(bottom: 5),
                       alignment: Alignment.center,
-                      child: ClipOval(
-                        child: Image.network(
-                          '${xivModel.getAvatar}',
-                          fit: BoxFit.fill,
-                        ),
+                      child: Stack(
+                        children: <Widget>[
+                          ClipOval(
+                            child: Image.network(
+                              '${xivModel.getAvatar}',
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                          Positioned(
+                            ///TODO: Change depending on job
+                            child: Icon(kJob[job].icon, size: 30,) ?? Icon(kJob['NoJob'].icon, size: 30,),
+                            right: 0,
+                            top: 70,
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -74,7 +87,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
                       CContainer(body: '${xivModel.getName}',sub: 'Player ID: ${xivModel.getID}', icon: FFFonts.app_character_info),
                       CContainer(body: 'Biography',sub: '${xivModel.getBio}', icon: FFFonts.app_notification_notices),
                       freeCompanyCContainer(),
-                      CContainer.colour(body: 'Gear',sub: 'soon', icon: FFFonts.ArmoryChest, color: kActiveColourAccent, activeOnPress: true, routeName: kRouteGearScreen),
+                      CContainer.colour(body: 'Gear',sub: '', icon: FFFonts.ArmoryChest, color: kActiveColourAccent, activeOnPress: true, routeName: kRouteGearScreen),
                       Hero(
                         tag: kHeroTagPortrait,
                         child: ContainerResponsive(

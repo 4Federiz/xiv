@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
@@ -21,6 +22,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Random random = Random();
     final xivModel = Provider.of<XIV>(context);
 
     ResponsiveWidgets.init(
@@ -30,13 +32,63 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       allowFontScaling: true, // Optional
     );
 
+    void digApi() async {
+      kLoadingIndicator(context);
+
+      dynamic response = await widget.json
+          .fetchData(textFieldValue.trim(), xivModel.getServer);
+
+      if (response.statusCode == 200) {
+        widget.jsonBody = response.body;
+        widget.decoder = jsonDecode(widget.jsonBody);
+
+        xivModel.setName = widget.decoder['Results'][0]['Name'];
+        xivModel.setID = widget.decoder['Results'][0]['ID'];
+
+        dynamic secondResponse =
+            await widget.json.fetchAllDataCharacter(xivModel.getID);
+        if (secondResponse.statusCode == 200) {
+          widget.jsonBody = secondResponse.body;
+          widget.decoder = jsonDecode(widget.jsonBody);
+
+          xivModel.fillVarsCharacter(widget.decoder);
+
+          if (xivModel.getFreeCompanyId != null) {
+            dynamic thirdResponse = await widget.json
+                .fetchAllDataFreeCompany(xivModel.getFreeCompanyId);
+            if (thirdResponse.statusCode == 200) {
+              widget.jsonBody = thirdResponse.body;
+              widget.decoder = jsonDecode(widget.jsonBody);
+              xivModel.fillVarsFC(widget.decoder);
+            }
+          } else {
+            xivModel.setFreeCompanyName = 'Not enlisted in a FC';
+          }
+
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            kRouteCharacterScreen,
+            (_) => false,
+          );
+        } else {
+          print('Error parsing data. Server may be wrong');
+          Navigator.pop(context);
+        }
+      } else {
+        print('Error parsing data. Name may be wrong');
+        Navigator.pop(context);
+      }
+    }
+
     return ResponsiveWidgets.builder(
       child: Scaffold(
         body: SafeArea(
           child: GestureDetector(
-            onTap: (){
+            onTap: () {
               FocusScopeNode currentFocus = FocusScope.of(context);
-              if(!currentFocus.hasPrimaryFocus) {currentFocus.unfocus();}
+              if (!currentFocus.hasPrimaryFocus) {
+                currentFocus.unfocus();
+              }
             },
             child: Center(
               child: Column(
@@ -73,59 +125,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         padding: EdgeInsets.only(left: 10),
                         child: FButton(
                           text: '  Search',
-                          toDo: () async {
-                            kLoadingIndicator(context);
-
-                            dynamic response = await widget.json.fetchData(
-                                textFieldValue.trim(), xivModel.getServer);
-
-                            if (response.statusCode == 200) {
-                              widget.jsonBody = response.body;
-                              widget.decoder = jsonDecode(widget.jsonBody);
-
-                              xivModel.setName =
-                                  widget.decoder['Results'][0]['Name'];
-                              xivModel.setID =
-                                  widget.decoder['Results'][0]['ID'];
-
-                              dynamic secondResponse = await widget.json
-                                  .fetchAllDataCharacter(xivModel.getID);
-                              if (secondResponse.statusCode == 200) {
-                                widget.jsonBody = secondResponse.body;
-                                widget.decoder = jsonDecode(widget.jsonBody);
-
-                                xivModel.fillVarsCharacter(widget.decoder);
-
-                                if (xivModel.getFreeCompanyId != null) {
-                                  dynamic thirdResponse = await widget.json
-                                      .fetchAllDataFreeCompany(
-                                          xivModel.getFreeCompanyId);
-                                  if (thirdResponse.statusCode == 200) {
-                                    widget.jsonBody = thirdResponse.body;
-                                    widget.decoder =
-                                        jsonDecode(widget.jsonBody);
-                                    xivModel.fillVarsFC(widget.decoder);
-                                  }
-                                } else {
-                                  xivModel.setFreeCompanyName =
-                                      'Not enlisted in a FC';
-                                }
-
-                                Navigator.pushNamedAndRemoveUntil(
-                                  context,
-                                  kRouteCharacterScreen,
-                                  (_) => false,
-                                );
-                              } else {
-                                print(
-                                    'Error parsing data. Server may be wrong');
-                                Navigator.pop(context);
-                              }
-                            } else {
-                              print('Error parsing data. Name may be wrong');
-                              Navigator.pop(context);
-                            }
-                          },
+                          toDo: digApi,
                         ),
                       ),
                       VerticalDivider(),
@@ -142,8 +142,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         height: 1080,
                         heightResponsive: true,
                         margin: EdgeInsets.only(left: 20, right: 20, bottom: 5),
-                        color: Colors.grey,
-                        child: Icon(FFFonts.SymbolQuestion),
+                        color: Colors.transparent,
+                        child: Image.asset('assets/stickers/chat_stamp_${random.nextInt(39) + 1}.png'),
                       ),
                     ),
                   ),

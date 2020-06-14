@@ -42,9 +42,21 @@ class _FreeCompanyScreenState extends State<FreeCompanyScreen> {
                       padding: EdgeInsets.only(bottom: 5),
                       alignment: Alignment.center,
                       child: ClipOval(
-                        child: Image.network(
-                          '${xivModel.getFreeCompanyCrest[2]}',
-                          fit: BoxFit.fill,
+                        child: Stack(
+                          children: <Widget>[
+                            Image.network(
+                              '${xivModel.getFreeCompanyCrest[0]}',
+                              fit: BoxFit.fill,
+                            ),
+                            Image.network(
+                              '${xivModel.getFreeCompanyCrest[1]}',
+                              fit: BoxFit.fill,
+                            ),
+                            Image.network(
+                              '${xivModel.getFreeCompanyCrest[2]}',
+                              fit: BoxFit.fill,
+                            )
+                          ],
                         ),
                       ),
                     ),
@@ -72,7 +84,7 @@ class _FreeCompanyScreenState extends State<FreeCompanyScreen> {
                           body:
                               '${xivModel.getFreeCompanyActiveMemberCount} Active members',
                           sub: 'FC ID: ${xivModel.getFreeCompanyId}',
-                          icon: FFFonts.app_notification_notices),
+                          icon: FFFonts.app_status_online),
                       CContainer(
                           body: '${xivModel.getFreeCompanyEstateName}',
                           sub:

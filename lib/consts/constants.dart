@@ -40,6 +40,7 @@ void kLoadingIndicator(BuildContext context) {
     barrierDismissible: false,
     builder: (BuildContext context) {
       return Dialog(
+        backgroundColor: Colors.transparent,
         child: GlowingProgressIndicator(
           child: Icon(
             FFFonts.app_payment_symbol,
@@ -64,6 +65,49 @@ Map<String, String> kDeities = {
   '10': 'Nald\'thal, The Traders',
   '11': 'Nophica, The Matron',
   '12': 'Althyk, The Keeper',
+};
+
+Map<String, Icon> kJob = {
+  'NoJob': Icon(FFFonts.SymbolMamet),
+  'WAR': Icon(FFFonts.class_job_021),
+  'ACN': Icon(FFFonts.class_job_026),
+  'ADV': Icon(FFFonts.ItemCategory_Shield),
+  'ALC': Icon(FFFonts.class_job_014),
+  'ARC': Icon(FFFonts.class_job_005),
+  'ARM': Icon(FFFonts.class_job_010),
+  'AST': Icon(FFFonts.class_job_033),
+  'BLM': Icon(FFFonts.class_job_025),
+  'BLU': Icon(FFFonts.class_job_036),
+  'BRD': Icon(FFFonts.class_job_023),
+  'BSM': Icon(FFFonts.ItemCategory_BSM),
+  'BTN': Icon(FFFonts.ItemCategory_BTN),
+  'CNJ': Icon(FFFonts.ItemCategory_CNJ),
+  'CRP': Icon(FFFonts.ItemCategory_CRP),
+  'CUL': Icon(FFFonts.ItemCategory_CUL),
+  'DNC': Icon(FFFonts.class_job_038),
+  'DRG': Icon(FFFonts.class_job_022),
+  'DRK': Icon(FFFonts.class_job_032),
+  'FSH': Icon(FFFonts.ItemCategory_fisher),
+  'GLA': Icon(FFFonts.ItemCategory_GLA),
+  'GNB': Icon(FFFonts.class_job_037),
+  'GSM': Icon(FFFonts.ItemCategory_GSM),
+  'LNC': Icon(FFFonts.ItemCategory_LNC),
+  'LTW': Icon(FFFonts.ItemCategory_LTW),
+  'MCH': Icon(FFFonts.class_job_031),
+  'MIN': Icon(FFFonts.ItemCategory_MIN),
+  'MNK': Icon(FFFonts.class_job_020),
+  'MRD': Icon(FFFonts.ItemCategory_MRD),
+  'NIN': Icon(FFFonts.class_job_030),
+  'PGL': Icon(FFFonts.ItemCategory_PGL),
+  'PLD': Icon(FFFonts.class_job_019),
+  'RDM': Icon(FFFonts.class_job_035),
+  'ROG': Icon(FFFonts.ItemCategory_ROG),
+  'SAM': Icon(FFFonts.class_job_034),
+  'SCH': Icon(FFFonts.class_job_028),
+  'SMN': Icon(FFFonts.class_job_027),
+  'THM': Icon(FFFonts.ItemCategory_THM),
+  'WHM': Icon(FFFonts.class_job_024),
+  'WVR': Icon(FFFonts.ItemCategory_WVR)
 };
 
 List<String> kServers = [
