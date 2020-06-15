@@ -5,6 +5,7 @@ class XIVItem {
   String _job;
   String _icon;
   String _name;
+  String _iLvl;
 
   set setItemID(String u) => _id = u;
   get getItemID => _id;
@@ -17,4 +18,7 @@ class XIVItem {
 
   set setItemIcon(String u) => _icon = kUrlNoDash + u;
   get getItemIcon => _icon;
+
+  set setItemiLevel(int u) => _iLvl = u.toString();
+  get getItemiLevel => _iLvl;
 }

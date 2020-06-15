@@ -4,8 +4,8 @@ import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:xiv/brains/xiv.dart';
 import 'package:xiv/consts/constants.dart';
 import 'package:show_up_animation/show_up_animation.dart';
-import 'package:flip_card/flip_card.dart';
 import 'package:xiv/widgets/clay_container.dart';
+import 'package:xiv/widgets/clay_flipcard.dart';
 
 class GearScreen extends StatefulWidget {
   @override
@@ -45,25 +45,24 @@ class _GearScreenState extends State<GearScreen> {
                   delayBetween: Duration(milliseconds: 800),
                   offset: -0.1,
                   children: <Widget>[
-                    FlipCard(
-                      ///TODO: Work on this.
-                      front: ContainerResponsive(
-                        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                        height: 280,
-                        width: 280,
-                        child: Image.network(
-                          xivModel.getItemIcon,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      back: ContainerResponsive(
-                        padding: EdgeInsets.only(left: 50),
-                        height: 400,
-                        width: 1000,
-                        color: Colors.transparent,
-                        child: CContainer.info(body: '${xivModel.getItemName}',sub: '-ID: ${xivModel.getItemID}\n -iLvl: LevelEquip\n -Materia: Materia/MateriaSlotCount melded', icon: FFFonts.Armoury_MainArm),
+                    ClayFlipCard(
+                      itemImage: xivModel.getItemIcon,
+                      child:
+                      CContainer.info(
+                          body: '${xivModel.getItemName}',
+                          sub: '-ID: ${xivModel.getItemID}\n -iLvl: ${xivModel.getItemiLevel}\n -Materia: ${{xivModel.getGearMainHandMateria}.length} melds',
+                          icon: FFFonts.Armoury_MainArm,
                       ),
                     ),
+//                    ClayFlipCard(
+//                      itemImage: xivModel.getItemIcon,
+//                      child:
+//                      CContainer.info(
+//                          body: '${xivModel.getItemName}',
+//                          sub: '-ID: ${xivModel.getItemID}\n -iLvl: ${xivModel.getItemiLevel}\n -Materia: ${{xivModel.getGearMainHandMateria}.length} melds',
+//                          icon: FFFonts.Armoury_Head,
+//                      ),
+//                    ),
                   ],
                 ),
               ),

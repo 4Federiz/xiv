@@ -142,6 +142,7 @@ class XIV with ChangeNotifier {
   get getItemName => _item.getItemName;
   get getItemJob => _item.getItemJob;
   get getItemIcon => _item.getItemIcon;
+  get getItemiLevel => _item.getItemiLevel;
 
   get getPrintableInfo =>
       '\n\n--Character--\nAvatar: $getAvatar\nBio: $getBio\nFreeCompany: $getFreeCompanyId\n'
@@ -164,9 +165,11 @@ class XIV with ChangeNotifier {
     /// https://xivapi.com/freecompany/9233645873504816758
     _freeCompany.setActive = decoder['FreeCompany']['Active'];
     _freeCompany.setCrest = decoder['FreeCompany']['Crest'];
-    _freeCompany.setActiveMemberCount = decoder['FreeCompany']['ActiveMemberCount'];
+    _freeCompany.setActiveMemberCount =
+        decoder['FreeCompany']['ActiveMemberCount'];
     _freeCompany.setEstateName = decoder['FreeCompany']['Estate']['Name'];
-    _freeCompany.setEstateGreeting = decoder['FreeCompany']['Estate']['Greeting'];
+    _freeCompany.setEstateGreeting =
+        decoder['FreeCompany']['Estate']['Greeting'];
     _freeCompany.setEstatePlot = decoder['FreeCompany']['Estate']['Plot'];
     _freeCompany.setGrandCompany = decoder['FreeCompany']['GrandCompany'];
     _freeCompany.setName = decoder['FreeCompany']['Name'];
@@ -179,66 +182,98 @@ class XIV with ChangeNotifier {
 
   void fillVarsGear(Map<String, dynamic> decoder) {
     /// https://xivapi.com/item/29427
-    _gearBody.setCreator = decoder['Character']['GearSet']['Gear']['Body']['Creator'];
+    _gearBody.setCreator =
+        decoder['Character']['GearSet']['Gear']['Body']['Creator'];
     _gearBody.setDye = decoder['Character']['GearSet']['Gear']['Body']['Dye'];
     _gearBody.setID = decoder['Character']['GearSet']['Gear']['Body']['ID'];
-    _gearBody.setMateria = decoder['Character']['GearSet']['Gear']['Body']['Materia'];
+    _gearBody.setMateria =
+        decoder['Character']['GearSet']['Gear']['Body']['Materia'];
 
-    _gearBracelets.setCreator = decoder['Character']['GearSet']['Gear']['Bracelets']['Creator'];
-    _gearBracelets.setDye = decoder['Character']['GearSet']['Gear']['Bracelets']['Dye'];
-    _gearBracelets.setID = decoder['Character']['GearSet']['Gear']['Bracelets']['ID'];
-    _gearBracelets.setMateria = decoder['Character']['GearSet']['Gear']['Bracelets']['Materia'];
+    _gearBracelets.setCreator =
+        decoder['Character']['GearSet']['Gear']['Bracelets']['Creator'];
+    _gearBracelets.setDye =
+        decoder['Character']['GearSet']['Gear']['Bracelets']['Dye'];
+    _gearBracelets.setID =
+        decoder['Character']['GearSet']['Gear']['Bracelets']['ID'];
+    _gearBracelets.setMateria =
+        decoder['Character']['GearSet']['Gear']['Bracelets']['Materia'];
 
-    _gearEarrings.setCreator = decoder['Character']['GearSet']['Gear']['Earrings']['Creator'];
-    _gearEarrings.setDye = decoder['Character']['GearSet']['Gear']['Earrings']['Dye'];
-    _gearEarrings.setID = decoder['Character']['GearSet']['Gear']['Earrings']['ID'];
-    _gearEarrings.setMateria = decoder['Character']['GearSet']['Gear']['Earrings']['Materia'];
+    _gearEarrings.setCreator =
+        decoder['Character']['GearSet']['Gear']['Earrings']['Creator'];
+    _gearEarrings.setDye =
+        decoder['Character']['GearSet']['Gear']['Earrings']['Dye'];
+    _gearEarrings.setID =
+        decoder['Character']['GearSet']['Gear']['Earrings']['ID'];
+    _gearEarrings.setMateria =
+        decoder['Character']['GearSet']['Gear']['Earrings']['Materia'];
 
-    _gearFeet.setCreator = decoder['Character']['GearSet']['Gear']['Feet']['Creator'];
+    _gearFeet.setCreator =
+        decoder['Character']['GearSet']['Gear']['Feet']['Creator'];
     _gearFeet.setDye = decoder['Character']['GearSet']['Gear']['Feet']['Dye'];
     _gearFeet.setID = decoder['Character']['GearSet']['Gear']['Feet']['ID'];
-    _gearFeet.setMateria = decoder['Character']['GearSet']['Gear']['Feet']['Materia'];
+    _gearFeet.setMateria =
+        decoder['Character']['GearSet']['Gear']['Feet']['Materia'];
 
-    _gearHands.setCreator = decoder['Character']['GearSet']['Gear']['Hands']['Creator'];
+    _gearHands.setCreator =
+        decoder['Character']['GearSet']['Gear']['Hands']['Creator'];
     _gearHands.setDye = decoder['Character']['GearSet']['Gear']['Hands']['Dye'];
     _gearHands.setID = decoder['Character']['GearSet']['Gear']['Hands']['ID'];
-    _gearHands.setMateria = decoder['Character']['GearSet']['Gear']['Hands']['Materia'];
+    _gearHands.setMateria =
+        decoder['Character']['GearSet']['Gear']['Hands']['Materia'];
 
-    _gearHead.setCreator = decoder['Character']['GearSet']['Gear']['Head']['Creator'];
+    _gearHead.setCreator =
+        decoder['Character']['GearSet']['Gear']['Head']['Creator'] ?? 'N/A';
     _gearHead.setDye = decoder['Character']['GearSet']['Gear']['Head']['Dye'];
     _gearHead.setID = decoder['Character']['GearSet']['Gear']['Head']['ID'];
-    _gearHead.setMateria = decoder['Character']['GearSet']['Gear']['Head']['Materia'];
+    _gearHead.setMateria =
+        decoder['Character']['GearSet']['Gear']['Head']['Materia'];
 
-    _gearLegs.setCreator = decoder['Character']['GearSet']['Gear']['Legs']['Creator'];
+    _gearLegs.setCreator =
+        decoder['Character']['GearSet']['Gear']['Legs']['Creator'];
     _gearLegs.setDye = decoder['Character']['GearSet']['Gear']['Legs']['Dye'];
     _gearLegs.setID = decoder['Character']['GearSet']['Gear']['Legs']['ID'];
-    _gearLegs.setMateria = decoder['Character']['GearSet']['Gear']['Legs']['Materia'];
+    _gearLegs.setMateria =
+        decoder['Character']['GearSet']['Gear']['Legs']['Materia'];
 
-    _gearMainHand.setCreator = decoder['Character']['GearSet']['Gear']['MainHand']['Creator'];
-    _gearMainHand.setDye = decoder['Character']['GearSet']['Gear']['MainHand']['Dye'];
-    _gearMainHand.setID = decoder['Character']['GearSet']['Gear']['MainHand']['ID'];
-    _gearMainHand.setMateria = decoder['Character']['GearSet']['Gear']['MainHand']['Materia'];
+    _gearMainHand.setCreator =
+        decoder['Character']['GearSet']['Gear']['MainHand']['Creator'];
+    _gearMainHand.setDye =
+        decoder['Character']['GearSet']['Gear']['MainHand']['Dye'];
+    _gearMainHand.setID =
+        decoder['Character']['GearSet']['Gear']['MainHand']['ID'];
+    _gearMainHand.setMateria =
+        decoder['Character']['GearSet']['Gear']['MainHand']['Materia'];
     fillVarsItem(_gearMainHand.getID);
 
-    _gearNecklace.setCreator = decoder['Character']['GearSet']['Gear']['Necklace']['Creator'];
-    _gearNecklace.setDye = decoder['Character']['GearSet']['Gear']['Necklace']['Dye'];
-    _gearNecklace.setID = decoder['Character']['GearSet']['Gear']['Necklace']['ID'];
-    _gearNecklace.setMateria = decoder['Character']['GearSet']['Gear']['Necklace']['Materia'];
+    _gearNecklace.setCreator =
+        decoder['Character']['GearSet']['Gear']['Necklace']['Creator'];
+    _gearNecklace.setDye =
+        decoder['Character']['GearSet']['Gear']['Necklace']['Dye'];
+    _gearNecklace.setID =
+        decoder['Character']['GearSet']['Gear']['Necklace']['ID'];
+    _gearNecklace.setMateria =
+        decoder['Character']['GearSet']['Gear']['Necklace']['Materia'];
 
-    _gearRing1.setCreator = decoder['Character']['GearSet']['Gear']['Ring1']['Creator'];
+    _gearRing1.setCreator =
+        decoder['Character']['GearSet']['Gear']['Ring1']['Creator'];
     _gearRing1.setDye = decoder['Character']['GearSet']['Gear']['Ring1']['Dye'];
     _gearRing1.setID = decoder['Character']['GearSet']['Gear']['Ring1']['ID'];
-    _gearRing1.setMateria = decoder['Character']['GearSet']['Gear']['Ring1']['Materia'];
+    _gearRing1.setMateria =
+        decoder['Character']['GearSet']['Gear']['Ring1']['Materia'];
 
-    _gearRing2.setCreator = decoder['Character']['GearSet']['Gear']['Ring2']['Creator'];
+    _gearRing2.setCreator =
+        decoder['Character']['GearSet']['Gear']['Ring2']['Creator'];
     _gearRing2.setDye = decoder['Character']['GearSet']['Gear']['Ring2']['Dye'];
     _gearRing2.setID = decoder['Character']['GearSet']['Gear']['Ring2']['ID'];
-    _gearRing2.setMateria = decoder['Character']['GearSet']['Gear']['Ring2']['Materia'];
+    _gearRing2.setMateria =
+        decoder['Character']['GearSet']['Gear']['Ring2']['Materia'];
 
-    _gearWaist.setCreator = decoder['Character']['GearSet']['Gear']['Waist']['Creator'];
+    _gearWaist.setCreator =
+        decoder['Character']['GearSet']['Gear']['Waist']['Creator'];
     _gearWaist.setDye = decoder['Character']['GearSet']['Gear']['Waist']['Dye'];
     _gearWaist.setID = decoder['Character']['GearSet']['Gear']['Waist']['ID'];
-    _gearWaist.setMateria = decoder['Character']['GearSet']['Gear']['Waist']['Materia'];
+    _gearWaist.setMateria =
+        decoder['Character']['GearSet']['Gear']['Waist']['Materia'];
     notifyListeners();
   }
 
@@ -252,11 +287,12 @@ class XIV with ChangeNotifier {
     if (response.statusCode == 200) {
       jsonBody = response.body;
       decoder = jsonDecode(jsonBody);
-    this._item.setItemID = itemID;
+      this._item.setItemID = itemID;
       this._item.setItemName = decoder['Name'];
-    this._item.setItemJob = decoder['ClassJobCategory']['Name'];
-    this._item.setItemIcon = decoder['Icon'];
-    notifyListeners();
+      this._item.setItemJob = decoder['ClassJobCategory']['Name'];
+      this._item.setItemIcon = decoder['Icon'];
+      this._item.setItemiLevel = decoder['LevelItem'];
+      notifyListeners();
     }
   }
 }
