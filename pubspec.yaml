@@ -17,6 +17,12 @@ dependencies:
   progress_indicators: ^0.1.5
   show_up_animation: ^1.0.2
   flip_card: ^0.4.4
+  flutter_launcher_icons: ^0.7.5
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon.png"
 
 dev_dependencies:
   flutter_test:

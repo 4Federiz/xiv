@@ -18,4 +18,5 @@ class XIVGear {
 
   set setMateria(List<dynamic> u) => _materia = u;
   get getMateria => _materia;
+  get getMateriaCount => _materia.length;
 }

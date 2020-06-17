@@ -63,62 +63,62 @@ class XIV with ChangeNotifier {
   get getGearBodyCreator => _gearBody.getCreator;
   get getGearBodyDye => _gearBody.getDye;
   get getGearBodyID => _gearBody.getID;
-  get getGearBodyMateria => _gearBody.getMateria;
+  get getGearBodyMateria => _gearBody.getMateriaCount;
 
   get getGearBraceletsCreator => _gearBracelets.getCreator;
   get getGearBraceletsDye => _gearBracelets.getDye;
   get getGearBraceletsID => _gearBracelets.getID;
-  get getGearBraceletsMateria => _gearBracelets.getMateria;
+  get getGearBraceletsMateria => _gearBracelets.getMateriaCount;
 
   get getGearEarringsCreator => _gearEarrings.getCreator;
   get getGearEarringsDye => _gearEarrings.getDye;
   get getGearEarringsID => _gearEarrings.getID;
-  get getGearEarringsMateria => _gearEarrings.getMateria;
+  get getGearEarringsMateria => _gearEarrings.getMateriaCount;
 
   get getGearFeetCreator => _gearFeet.getCreator;
   get getGearFeetDye => _gearFeet.getDye;
   get getGearFeetID => _gearFeet.getID;
-  get getGearFeetMateria => _gearFeet.getMateria;
+  get getGearFeetMateria => _gearFeet.getMateriaCount;
 
   get getGearHandsCreator => _gearHands.getCreator;
   get getGearHandsDye => _gearHands.getDye;
   get getGearHandsID => _gearHands.getID;
-  get getGearHandsMateria => _gearHands.getMateria;
+  get getGearHandsMateria => _gearHands.getMateriaCount;
 
   get getGearHeadCreator => _gearHead.getCreator;
   get getGearHeadDye => _gearHead.getDye;
   get getGearHeadID => _gearHead.getID;
-  get getGearHeadMateria => _gearHead.getMateria;
+  get getGearHeadMateria => _gearHead.getMateriaCount;
 
   get getGearLegsCreator => _gearLegs.getCreator;
   get getGearLegsDye => _gearLegs.getDye;
   get getGearLegsID => _gearLegs.getID;
-  get getGearLegsMateria => _gearLegs.getMateria;
+  get getGearLegsMateria => _gearLegs.getMateriaCount;
 
   get getGearMainHandCreator => _gearMainHand.getCreator;
   get getGearMainHandDye => _gearMainHand.getDye;
   get getGearMainHandID => _gearMainHand.getID;
-  get getGearMainHandMateria => _gearMainHand.getMateria;
+  get getGearMainHandMateriaCount => _gearMainHand.getMateriaCount;
 
   get getGearNecklaceCreator => _gearNecklace.getCreator;
   get getGearNecklaceDye => _gearNecklace.getDye;
   get getGearNecklaceID => _gearNecklace.getID;
-  get getGearNecklaceMateria => _gearNecklace.getMateria;
+  get getGearNecklaceMateria => _gearNecklace.getMateriaCount;
 
   get getGearRing1Creator => _gearRing1.getCreator;
   get getGearRing1Dye => _gearRing1.getDye;
   get getGearRing1ID => _gearRing1.getID;
-  get getGearRing1Materia => _gearRing1.getMateria;
+  get getGearRing1Materia => _gearRing1.getMateriaCount;
 
   get getGearRing2Creator => _gearRing2.getCreator;
   get getGearRing2Dye => _gearRing2.getDye;
   get getGearRing2ID => _gearRing2.getID;
-  get getGearRing2Materia => _gearRing2.getMateria;
+  get getGearRing2Materia => _gearRing2.getMateriaCount;
 
   get getGearWaistCreator => _gearWaist.getCreator;
   get getGearWaistDye => _gearWaist.getDye;
   get getGearWaistID => _gearWaist.getID;
-  get getGearWaistMateria => _gearWaist.getMateria;
+  get getGearWaistMateria => _gearWaist.getMateriaCount;
 
   set setGuardianDeity(int u) => _guardianDeity = u.toString();
   get getGuardianDeity => kDeities[_guardianDeity];
@@ -221,12 +221,12 @@ class XIV with ChangeNotifier {
     _gearHands.setMateria =
         decoder['Character']['GearSet']['Gear']['Hands']['Materia'];
 
-    _gearHead.setCreator =
-        decoder['Character']['GearSet']['Gear']['Head']['Creator'] ?? 'N/A';
-    _gearHead.setDye = decoder['Character']['GearSet']['Gear']['Head']['Dye'];
-    _gearHead.setID = decoder['Character']['GearSet']['Gear']['Head']['ID'];
-    _gearHead.setMateria =
-        decoder['Character']['GearSet']['Gear']['Head']['Materia'];
+//    _gearHead.setCreator =
+//        decoder['Character']['GearSet']['Gear']['Head']['Creator'];
+//    _gearHead.setDye = decoder['Character']['GearSet']['Gear']['Head']['Dye'];
+//    _gearHead.setID = decoder['Character']['GearSet']['Gear']['Head']['ID'];
+//    _gearHead.setMateria =
+//        decoder['Character']['GearSet']['Gear']['Head']['Materia'];
 
     _gearLegs.setCreator =
         decoder['Character']['GearSet']['Gear']['Legs']['Creator'];
