@@ -50,7 +50,7 @@ class _GearScreenState extends State<GearScreen> {
                       child:
                       CContainer.info(
                           body: '${xivModel.getItemName}',
-                          sub: '-ID: ${xivModel.getItemID}\n -iLvl: ${xivModel.getItemiLevel}\n -Materia: ${xivModel.getGearMainHandMateriaCount} melds',
+                          sub: '-ID: ${xivModel.getItemID}\n -iLvl: ${xivModel.getItemiLevel}\n-Materia: ${xivModel.getGearMainHandMateriaCount} melds',
                           icon: FFFonts.Armoury_MainArm,
                       ),
                     ),

@@ -1,3 +1,4 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 import 'package:xiv/consts/f_f_fonts_icons.dart';
@@ -23,6 +24,11 @@ const kRouteCharacterScreen = '/Character';
 const kRouteWelcomeScreen = '/Welcome';
 const kRouteIntroScreen = '/';
 
+const kNullString = 'N/A';
+const kNullInt = 0;
+const kNullList = [];
+
+
 const kTextStyleBody = TextStyle(
   color: kActiveColourDim,
   fontWeight: FontWeight.bold,
@@ -38,8 +44,6 @@ const kTextStyleInfo = TextStyle(
   fontWeight: FontWeight.w700,
   fontSize: 25,
 );
-
-final kTheme = ThemeData.dark();
 
 void kLoadingIndicator(BuildContext context) {
   showDialog(

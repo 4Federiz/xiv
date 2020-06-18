@@ -1,3 +1,4 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:xiv/brains/xiv.dart';
@@ -13,18 +14,24 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<XIV>(
-      create: (_) => XIV(),
-      child: MaterialApp(
-        theme: kTheme,
-        initialRoute: kRouteIntroScreen,
-        routes: {
-          kRouteIntroScreen: (context) => IntroScreen(),
-          kRouteWelcomeScreen: (context) => WelcomeScreen(),
-          kRouteCharacterScreen: (context) => CharacterScreen(),
-          kRouteFreeCompanyScreen: (context) => FreeCompanyScreen(),
-          kRouteGearScreen: (context) => GearScreen(),
-        },
+    return AdaptiveTheme(
+      light: ThemeData.light(),
+      dark: ThemeData.dark(),
+      initial: AdaptiveThemeMode.system,
+      builder: (theme, darkTheme) => ChangeNotifierProvider<XIV>(
+        create: (_) => XIV(),
+        child: MaterialApp(
+          theme: theme,
+          darkTheme: darkTheme,
+          initialRoute: kRouteIntroScreen,
+          routes: {
+            kRouteIntroScreen: (context) => IntroScreen(),
+            kRouteWelcomeScreen: (context) => WelcomeScreen(),
+            kRouteCharacterScreen: (context) => CharacterScreen(),
+            kRouteFreeCompanyScreen: (context) => FreeCompanyScreen(),
+            kRouteGearScreen: (context) => GearScreen(),
+          },
+        ),
       ),
     );
   }

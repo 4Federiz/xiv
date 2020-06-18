@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 //enum _part{Body, Bracelets, Earrings, Feet, Hands, Head, Legs, MainHand, Necklace, Ring1, Ring2, Waist}
 class XIVGear {
   String _creator;

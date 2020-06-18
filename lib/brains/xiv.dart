@@ -182,58 +182,58 @@ class XIV with ChangeNotifier {
 
   void fillVarsGear(Map<String, dynamic> decoder) {
     /// https://xivapi.com/item/29427
-    _gearBody.setCreator =
-        decoder['Character']['GearSet']['Gear']['Body']['Creator'];
-    _gearBody.setDye = decoder['Character']['GearSet']['Gear']['Body']['Dye'];
-    _gearBody.setID = decoder['Character']['GearSet']['Gear']['Body']['ID'];
-    _gearBody.setMateria =
-        decoder['Character']['GearSet']['Gear']['Body']['Materia'];
-
-    _gearBracelets.setCreator =
-        decoder['Character']['GearSet']['Gear']['Bracelets']['Creator'];
-    _gearBracelets.setDye =
-        decoder['Character']['GearSet']['Gear']['Bracelets']['Dye'];
-    _gearBracelets.setID =
-        decoder['Character']['GearSet']['Gear']['Bracelets']['ID'];
-    _gearBracelets.setMateria =
-        decoder['Character']['GearSet']['Gear']['Bracelets']['Materia'];
-
-    _gearEarrings.setCreator =
-        decoder['Character']['GearSet']['Gear']['Earrings']['Creator'];
-    _gearEarrings.setDye =
-        decoder['Character']['GearSet']['Gear']['Earrings']['Dye'];
-    _gearEarrings.setID =
-        decoder['Character']['GearSet']['Gear']['Earrings']['ID'];
-    _gearEarrings.setMateria =
-        decoder['Character']['GearSet']['Gear']['Earrings']['Materia'];
-
-    _gearFeet.setCreator =
-        decoder['Character']['GearSet']['Gear']['Feet']['Creator'];
-    _gearFeet.setDye = decoder['Character']['GearSet']['Gear']['Feet']['Dye'];
-    _gearFeet.setID = decoder['Character']['GearSet']['Gear']['Feet']['ID'];
-    _gearFeet.setMateria =
-        decoder['Character']['GearSet']['Gear']['Feet']['Materia'];
-
-    _gearHands.setCreator =
-        decoder['Character']['GearSet']['Gear']['Hands']['Creator'];
-    _gearHands.setDye = decoder['Character']['GearSet']['Gear']['Hands']['Dye'];
-    _gearHands.setID = decoder['Character']['GearSet']['Gear']['Hands']['ID'];
-    _gearHands.setMateria =
-        decoder['Character']['GearSet']['Gear']['Hands']['Materia'];
-
+//    _gearBody.setCreator =
+//        decoder['Character']['GearSet']['Gear']['Body']['Creator'];
+//    _gearBody.setDye = decoder['Character']['GearSet']['Gear']['Body']['Dye'];
+//    _gearBody.setID = decoder['Character']['GearSet']['Gear']['Body']['ID'];
+//    _gearBody.setMateria =
+//        decoder['Character']['GearSet']['Gear']['Body']['Materia'];
+//
+//    _gearBracelets.setCreator =
+//        decoder['Character']['GearSet']['Gear']['Bracelets']['Creator'];
+//    _gearBracelets.setDye =
+//        decoder['Character']['GearSet']['Gear']['Bracelets']['Dye'];
+//    _gearBracelets.setID =
+//        decoder['Character']['GearSet']['Gear']['Bracelets']['ID'];
+//    _gearBracelets.setMateria =
+//        decoder['Character']['GearSet']['Gear']['Bracelets']['Materia'];
+//
+//    _gearEarrings.setCreator =
+//        decoder['Character']['GearSet']['Gear']['Earrings']['Creator'];
+//    _gearEarrings.setDye =
+//        decoder['Character']['GearSet']['Gear']['Earrings']['Dye'];
+//    _gearEarrings.setID =
+//        decoder['Character']['GearSet']['Gear']['Earrings']['ID'];
+//    _gearEarrings.setMateria =
+//        decoder['Character']['GearSet']['Gear']['Earrings']['Materia'];
+//
+//    _gearFeet.setCreator =
+//        decoder['Character']['GearSet']['Gear']['Feet']['Creator'];
+//    _gearFeet.setDye = decoder['Character']['GearSet']['Gear']['Feet']['Dye'];
+//    _gearFeet.setID = decoder['Character']['GearSet']['Gear']['Feet']['ID'];
+//    _gearFeet.setMateria =
+//        decoder['Character']['GearSet']['Gear']['Feet']['Materia'];
+//
+//    _gearHands.setCreator =
+//        decoder['Character']['GearSet']['Gear']['Hands']['Creator'];
+//    _gearHands.setDye = decoder['Character']['GearSet']['Gear']['Hands']['Dye'];
+//    _gearHands.setID = decoder['Character']['GearSet']['Gear']['Hands']['ID'];
+//    _gearHands.setMateria =
+//        decoder['Character']['GearSet']['Gear']['Hands']['Materia'];
+//
 //    _gearHead.setCreator =
-//        decoder['Character']['GearSet']['Gear']['Head']['Creator'];
-//    _gearHead.setDye = decoder['Character']['GearSet']['Gear']['Head']['Dye'];
-//    _gearHead.setID = decoder['Character']['GearSet']['Gear']['Head']['ID'];
+//        decoder['Character']['GearSet']['Gear']['Head']['Creator'] ?? kNullString;
+//    _gearHead.setDye = decoder['Character']['GearSet']['Gear']['Head']['Dye'] ?? kNullString;
+//    _gearHead.setID = decoder['Character']['GearSet']['Gear']['Head']['ID'] ?? kNullInt;
 //    _gearHead.setMateria =
-//        decoder['Character']['GearSet']['Gear']['Head']['Materia'];
-
-    _gearLegs.setCreator =
-        decoder['Character']['GearSet']['Gear']['Legs']['Creator'];
-    _gearLegs.setDye = decoder['Character']['GearSet']['Gear']['Legs']['Dye'];
-    _gearLegs.setID = decoder['Character']['GearSet']['Gear']['Legs']['ID'];
-    _gearLegs.setMateria =
-        decoder['Character']['GearSet']['Gear']['Legs']['Materia'];
+//        decoder['Character']['GearSet']['Gear']['Head']['Materia'] ?? kNullList;
+//
+//    _gearLegs.setCreator =
+//        decoder['Character']['GearSet']['Gear']['Legs']['Creator'];
+//    _gearLegs.setDye = decoder['Character']['GearSet']['Gear']['Legs']['Dye'];
+//    _gearLegs.setID = decoder['Character']['GearSet']['Gear']['Legs']['ID'];
+//    _gearLegs.setMateria =
+//        decoder['Character']['GearSet']['Gear']['Legs']['Materia'];
 
     _gearMainHand.setCreator =
         decoder['Character']['GearSet']['Gear']['MainHand']['Creator'];
@@ -245,35 +245,35 @@ class XIV with ChangeNotifier {
         decoder['Character']['GearSet']['Gear']['MainHand']['Materia'];
     fillVarsItem(_gearMainHand.getID);
 
-    _gearNecklace.setCreator =
-        decoder['Character']['GearSet']['Gear']['Necklace']['Creator'];
-    _gearNecklace.setDye =
-        decoder['Character']['GearSet']['Gear']['Necklace']['Dye'];
-    _gearNecklace.setID =
-        decoder['Character']['GearSet']['Gear']['Necklace']['ID'];
-    _gearNecklace.setMateria =
-        decoder['Character']['GearSet']['Gear']['Necklace']['Materia'];
-
-    _gearRing1.setCreator =
-        decoder['Character']['GearSet']['Gear']['Ring1']['Creator'];
-    _gearRing1.setDye = decoder['Character']['GearSet']['Gear']['Ring1']['Dye'];
-    _gearRing1.setID = decoder['Character']['GearSet']['Gear']['Ring1']['ID'];
-    _gearRing1.setMateria =
-        decoder['Character']['GearSet']['Gear']['Ring1']['Materia'];
-
-    _gearRing2.setCreator =
-        decoder['Character']['GearSet']['Gear']['Ring2']['Creator'];
-    _gearRing2.setDye = decoder['Character']['GearSet']['Gear']['Ring2']['Dye'];
-    _gearRing2.setID = decoder['Character']['GearSet']['Gear']['Ring2']['ID'];
-    _gearRing2.setMateria =
-        decoder['Character']['GearSet']['Gear']['Ring2']['Materia'];
-
-    _gearWaist.setCreator =
-        decoder['Character']['GearSet']['Gear']['Waist']['Creator'];
-    _gearWaist.setDye = decoder['Character']['GearSet']['Gear']['Waist']['Dye'];
-    _gearWaist.setID = decoder['Character']['GearSet']['Gear']['Waist']['ID'];
-    _gearWaist.setMateria =
-        decoder['Character']['GearSet']['Gear']['Waist']['Materia'];
+//    _gearNecklace.setCreator =
+//        decoder['Character']['GearSet']['Gear']['Necklace']['Creator'];
+//    _gearNecklace.setDye =
+//        decoder['Character']['GearSet']['Gear']['Necklace']['Dye'];
+//    _gearNecklace.setID =
+//        decoder['Character']['GearSet']['Gear']['Necklace']['ID'];
+//    _gearNecklace.setMateria =
+//        decoder['Character']['GearSet']['Gear']['Necklace']['Materia'];
+//
+//    _gearRing1.setCreator =
+//        decoder['Character']['GearSet']['Gear']['Ring1']['Creator'];
+//    _gearRing1.setDye = decoder['Character']['GearSet']['Gear']['Ring1']['Dye'];
+//    _gearRing1.setID = decoder['Character']['GearSet']['Gear']['Ring1']['ID'];
+//    _gearRing1.setMateria =
+//        decoder['Character']['GearSet']['Gear']['Ring1']['Materia'];
+//
+//    _gearRing2.setCreator =
+//        decoder['Character']['GearSet']['Gear']['Ring2']['Creator'];
+//    _gearRing2.setDye = decoder['Character']['GearSet']['Gear']['Ring2']['Dye'];
+//    _gearRing2.setID = decoder['Character']['GearSet']['Gear']['Ring2']['ID'];
+//    _gearRing2.setMateria =
+//        decoder['Character']['GearSet']['Gear']['Ring2']['Materia'];
+//
+//    _gearWaist.setCreator =
+//        decoder['Character']['GearSet']['Gear']['Waist']['Creator'];
+//    _gearWaist.setDye = decoder['Character']['GearSet']['Gear']['Waist']['Dye'];
+//    _gearWaist.setID = decoder['Character']['GearSet']['Gear']['Waist']['ID'];
+//    _gearWaist.setMateria =
+//        decoder['Character']['GearSet']['Gear']['Waist']['Materia'];
     notifyListeners();
   }
 
