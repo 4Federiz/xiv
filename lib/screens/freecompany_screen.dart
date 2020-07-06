@@ -22,7 +22,6 @@ class _FreeCompanyScreenState extends State<FreeCompanyScreen> {
       allowFontScaling: true, // Optional
     );
 
-    ///TODO: What if Not in a FC?
     return ResponsiveWidgets.builder(
       child: Scaffold(
         body: SafeArea(
