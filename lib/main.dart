@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     return AdaptiveTheme(
       light: ThemeData.light(),
       dark: ThemeData.dark(),
-      initial: AdaptiveThemeMode.system,
+      initial: AdaptiveThemeMode.dark, //AdaptiveThemeMode.system,
       builder: (theme, darkTheme) => ChangeNotifierProvider<XIV>(
         create: (_) => XIV(),
         child: MaterialApp(
