@@ -9,6 +9,7 @@ final String kApiKey =
 final String kUrl = 'https://xivapi.com/';
 final String kUrlNoDash = 'https://xivapi.com';
 final String kUrlDocs = 'https://xivapi.com/docs';
+const String kUrlTwitter = 'https://twitter.com/Federiz';
 
 const kActiveColour = Color.fromRGBO(64, 75, 96, 0.9);
 const kActiveColourDim = Color(0xFFEFEEEA);

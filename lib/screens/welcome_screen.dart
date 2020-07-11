@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:xiv/brains/xiv.dart';
 import 'package:xiv/consts/constants.dart';
+import 'package:xiv/widgets/clay_dialog.dart';
 import 'package:xiv/widgets/dropdown_menu.dart';
 import 'package:xiv/widgets/flat_button.dart';
 
@@ -20,6 +22,26 @@ class WelcomeScreen extends StatefulWidget {
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
   String textFieldValue;
+
+  _showDialog() async {
+    await Future.delayed(Duration(milliseconds: 50));
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return CDialog();
+        });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _showDialog();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -144,10 +166,30 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         heightResponsive: true,
                         margin: EdgeInsets.only(left: 20, right: 20, bottom: 5),
                         color: Colors.transparent,
-                        child: Image.asset('assets/stickers/chat_stamp_${random.nextInt(39) + 1}.png'),
+                        child: Image.asset(
+                            'assets/stickers/chat_stamp_${random.nextInt(39) + 1}.png'),
                       ),
                     ),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 5, bottom: 5),
+                    child: RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                              text: 'Please report bugs ',
+                              style: TextStyle(color: kActiveColour)),
+                          TextSpan(
+                            text: '@Federiz',
+                            style: TextStyle(
+                              color: kActiveColourAccent,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),
