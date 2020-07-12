@@ -1,7 +1,5 @@
 import 'dart:convert';
 import 'dart:math';
-import 'package:adaptive_theme/adaptive_theme.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
@@ -28,7 +26,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return CDialog();
+          return CDialog(
+            title: 'Beta Version',
+            body:
+                'More functionality soon —like being able to see the avatar Gear or search for items.',
+            gifString: kGifBeta,
+          );
         });
   }
 
@@ -65,132 +68,180 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         widget.jsonBody = response.body;
         widget.decoder = jsonDecode(widget.jsonBody);
 
-        xivModel.setName = widget.decoder['Results'][0]['Name'];
-        xivModel.setID = widget.decoder['Results'][0]['ID'];
+        if (widget.decoder['Pagination']['Page'] == 0) {
+          print('Nothing found');
+          Navigator.pushNamed(context, kRouteErrorScreen);
+        }
 
-        dynamic secondResponse =
-            await widget.json.fetchAllDataCharacter(xivModel.getID);
-        if (secondResponse.statusCode == 200) {
-          widget.jsonBody = secondResponse.body;
-          widget.decoder = jsonDecode(widget.jsonBody);
+        if (widget.decoder['Pagination']['Page'] == 1) {
+          print('Found');
+          xivModel.setName = widget.decoder['Results'][0]['Name'];
+          xivModel.setID = widget.decoder['Results'][0]['ID'];
 
-          xivModel.fillVarsCharacter(widget.decoder);
+          dynamic secondResponse =
+              await widget.json.fetchAllDataCharacter(xivModel.getID);
+          if (secondResponse.statusCode == 200) {
+            widget.jsonBody = secondResponse.body;
+            widget.decoder = jsonDecode(widget.jsonBody);
 
-          if (xivModel.getFreeCompanyId != null) {
-            dynamic thirdResponse = await widget.json
-                .fetchAllDataFreeCompany(xivModel.getFreeCompanyId);
-            if (thirdResponse.statusCode == 200) {
-              widget.jsonBody = thirdResponse.body;
-              widget.decoder = jsonDecode(widget.jsonBody);
-              xivModel.fillVarsFC(widget.decoder);
+            xivModel.fillVarsCharacter(widget.decoder);
+
+            if (xivModel.getFreeCompanyId != null) {
+              dynamic thirdResponse = await widget.json
+                  .fetchAllDataFreeCompany(xivModel.getFreeCompanyId);
+              if (thirdResponse.statusCode == 200) {
+                widget.jsonBody = thirdResponse.body;
+                widget.decoder = jsonDecode(widget.jsonBody);
+                xivModel.fillVarsFC(widget.decoder);
+              }
+            } else {
+              xivModel.setFreeCompanyName = 'Not enlisted in a FC';
             }
-          } else {
-            xivModel.setFreeCompanyName = 'Not enlisted in a FC';
-          }
 
-          Navigator.pushNamedAndRemoveUntil(
-            context,
-            kRouteCharacterScreen,
-            (_) => false,
-          );
+//          Navigator.pushNamedAndRemoveUntil(
+            Navigator.pushNamed(
+              context,
+              kRouteCharacterScreen,
+//            (_) => false,
+            );
+          }
         } else {
           print('Error parsing data. Server may be wrong');
-          Navigator.pop(context);
         }
-      } else {
+      }
+
+      if (response.statusCode != 200) {
         print('Error parsing data. Name may be wrong');
-        Navigator.pop(context);
       }
     }
 
     return ResponsiveWidgets.builder(
-      child: Scaffold(
-        body: SafeArea(
-          child: GestureDetector(
-            onTap: () {
-              FocusScopeNode currentFocus = FocusScope.of(context);
-              if (!currentFocus.hasPrimaryFocus) {
-                currentFocus.unfocus();
-              }
-            },
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget>[
-                  ContainerResponsive(
-                    margin: EdgeInsets.symmetric(horizontal: 15),
-                    padding: EdgeInsets.only(top: 30),
-                    child: TextField(
-                      onChanged: (v) {
-                        textFieldValue = v;
-                      },
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        icon: Hero(
-                          tag: kHeroTagIntroScreen,
-                          child: Icon(
-                            FFFonts.FFXIVMeteo,
-                            size: 60,
-                          ),
-                        ),
-                        labelText: 'Character Name',
-                        hintText: '',
-                      ),
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      ContainerResponsive(
-                        margin: EdgeInsets.all(5),
-                        padding: EdgeInsets.only(left: 10),
-                        child: FButton(
-                          text: '  Search',
-                          toDo: digApi,
-                        ),
-                      ),
-                      VerticalDivider(),
-                      ContainerResponsive(
-                        margin: EdgeInsets.all(10),
-                        child: DropDownMenu(),
-                      ),
-                    ],
-                  ),
-                  Flexible(
-                    child: Center(
-                      child: ContainerResponsive(
-                        width: double.maxFinite,
-                        height: 1080,
-                        heightResponsive: true,
-                        margin: EdgeInsets.only(left: 20, right: 20, bottom: 5),
-                        color: Colors.transparent,
-                        child: Image.asset(
-                            'assets/stickers/chat_stamp_${random.nextInt(39) + 1}.png'),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 5, bottom: 5),
-                    child: RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                              text: 'Please report bugs ',
-                              style: TextStyle(color: kActiveColour)),
-                          TextSpan(
-                            text: '@Federiz',
-                            style: TextStyle(
-                              color: kActiveColourAccent,
-                              decoration: TextDecoration.underline,
+      child: WillPopScope(
+        //Override back button. No way back.
+        onWillPop: () async => false,
+        child: Scaffold(
+          body: SafeArea(
+            child: GestureDetector(
+              onTap: () {
+                FocusScopeNode currentFocus = FocusScope.of(context);
+                if (!currentFocus.hasPrimaryFocus) {
+                  currentFocus.unfocus();
+                }
+              },
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    ContainerResponsive(
+                      margin: EdgeInsets.symmetric(horizontal: 15),
+                      padding: EdgeInsets.only(top: 30),
+                      child: TextField(
+                        onChanged: (v) {
+                          textFieldValue = v;
+                        },
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          icon: Hero(
+                            tag: kHeroTagIntroScreen,
+                            child: Icon(
+                              FFFonts.FFXIVMeteo,
+                              size: 60,
                             ),
                           ),
-                        ],
+                          labelText: 'Character Name',
+                          hintText: '',
+                        ),
                       ),
                     ),
-                  )
-                ],
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        ContainerResponsive(
+                          margin: EdgeInsets.all(5),
+                          padding: EdgeInsets.only(left: 10),
+                          child: FButton(
+                            text: '  Search',
+                            toDo: digApi,
+                          ),
+                        ),
+                        VerticalDivider(),
+                        ContainerResponsive(
+                          margin: EdgeInsets.all(10),
+                          child: DropDownMenu(),
+                        ),
+                      ],
+                    ),
+                    Flexible(
+                      child: Center(
+                        child: ContainerResponsive(
+                          width: double.maxFinite,
+                          height: 1080,
+                          heightResponsive: true,
+                          margin:
+                              EdgeInsets.only(left: 20, right: 20, bottom: 5),
+                          color: Colors.transparent,
+                          child: Image.asset(
+                              'assets/stickers/chat_stamp_${random.nextInt(39) + 1}.png'),
+                        ),
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: <Widget>[
+                        ButtonTheme(
+                          height: 1,
+                          minWidth: 5,
+                          child: RaisedButton(
+                            color: Colors.transparent,
+                            elevation: 0,
+                            child: Row(
+                              children: <Widget>[
+                                Icon(FFFonts.SymbolMamet, color: kBackgroundColour,),
+                                Text(' credits', style: TextStyle(color: kBackgroundColour),),
+                              ],
+                            ),
+
+                            onPressed: () {},
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 5, bottom: 15),
+                          child: RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                    text: 'Please report bugs ',
+                                    style: TextStyle(
+                                      color: Colors.white24,
+                                    )),
+                                TextSpan(
+                                  text: '@Federiz ',
+                                  style: TextStyle(
+                                    color: kActiveColourAccent,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                ),
+                                WidgetSpan(
+                                  child: Icon(
+                                    FFFonts.app_drawer_support,
+                                    color: Colors.white24,
+                                    size: 14,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
           ),

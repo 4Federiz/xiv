@@ -9,6 +9,8 @@ import 'package:xiv/screens/gear_screen.dart';
 import 'package:xiv/screens/intro_screen.dart';
 import 'package:xiv/screens/welcome_screen.dart';
 
+import 'screens/error_screen.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -31,6 +33,7 @@ class MyApp extends StatelessWidget {
             kRouteCharacterScreen: (context) => CharacterScreen(),
             kRouteFreeCompanyScreen: (context) => FreeCompanyScreen(),
             kRouteGearScreen: (context) => GearScreen(),
+            kRouteErrorScreen: (context) => ErrorScreen(),
           },
         ),
       ),

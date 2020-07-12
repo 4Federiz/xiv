@@ -45,65 +45,73 @@ class _CharacterScreenState extends State<CharacterScreen> {
     }
 
     return ResponsiveWidgets.builder(
-      child: Scaffold(
-        body: SafeArea(
-          child: Center(
-            child: CustomScrollView(
-              slivers: <Widget>[
-                SliverAppBar(
+      //Override back button, it presses 3 times.
+      child: WillPopScope(
+        onWillPop: () async {
+          int count = 0;
+          Navigator.of(context).popUntil((_) => count++ >= 2);
+          return true;
+        },
+        child: Scaffold(
+          body: SafeArea(
+            child: Center(
+              child: CustomScrollView(
+                slivers: <Widget>[
+                  SliverAppBar(
 //                  title: Container(
 //                    margin: EdgeInsets.only(top: 30),
 //                    child: Text('${xivModel.getName}'),
 //                  ),
-                  expandedHeight: 100,
-                  floating: false,
-                  backgroundColor: Colors.transparent,
-                  flexibleSpace: FlexibleSpaceBar(
-                    background: ContainerResponsive(
-                      padding: EdgeInsets.only(bottom: 5),
-                      alignment: Alignment.center,
-                      child: Stack(
-                        children: <Widget>[
-                          ClipOval(
-                            child: Image.network(
-                              '${xivModel.getAvatar}',
-                              fit: BoxFit.fill,
+                    expandedHeight: 100,
+                    floating: false,
+                    backgroundColor: Colors.transparent,
+                    flexibleSpace: FlexibleSpaceBar(
+                      background: ContainerResponsive(
+                        padding: EdgeInsets.only(bottom: 5),
+                        alignment: Alignment.center,
+                        child: Stack(
+                          children: <Widget>[
+                            ClipOval(
+                              child: Image.network(
+                                '${xivModel.getAvatar}',
+                                fit: BoxFit.fill,
+                              ),
                             ),
-                          ),
-                          Positioned(
-                            child: Icon(kJob[job].icon, size: 30,) ?? Icon(kJob['NoJob'].icon, size: 30,),
-                            right: 0,
-                            top: 70,
-                          ),
-                        ],
+                            Positioned(
+                              child: Icon(kJob[job].icon, size: 30,) ?? Icon(kJob['NoJob'].icon, size: 30,),
+                              right: 0,
+                              top: 70,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-                SliverList(
-                  delegate: SliverChildListDelegate(
-                    [
-                      CContainer(body: '${xivModel.getName}',sub: 'Player ID: ${xivModel.getID}', icon: FFFonts.app_character_info),
-                      CContainer(body: 'Biography',sub: '${xivModel.getBio}', icon: FFFonts.app_notification_notices),
-                      freeCompanyCContainer(),
+                  SliverList(
+                    delegate: SliverChildListDelegate(
+                      [
+                        CContainer(body: '${xivModel.getName}',sub: 'Player ID: ${xivModel.getID}', icon: FFFonts.app_character_info),
+                        CContainer(body: 'Biography',sub: '${xivModel.getBio}', icon: FFFonts.app_notification_notices),
+                        freeCompanyCContainer(),
 //                      CContainer.colour(body: 'Gear',sub: '', icon: FFFonts.ArmoryChest, color: kActiveColourAccent, activeOnPress: true, routeName: kRouteGearScreen),
-                      Hero(
-                        tag: kHeroTagPortrait,
-                        child: ContainerResponsive(
-                          heightResponsive: true,
-                          padding: EdgeInsets.symmetric(horizontal: 12),
-                          child: Image.network(
-                            '${xivModel.getPortrait}',
-                            fit: BoxFit.contain,
+                        Hero(
+                          tag: kHeroTagPortrait,
+                          child: ContainerResponsive(
+                            heightResponsive: true,
+                            padding: EdgeInsets.symmetric(horizontal: 12),
+                            child: Image.network(
+                              '${xivModel.getPortrait}',
+                              fit: BoxFit.contain,
+                            ),
                           ),
                         ),
-                      ),
-                      CContainer(body: 'Birthday',sub: '${xivModel.getNameDay}', icon: FFFonts.Schedule),
-                      CContainer(body: 'Guardian',sub: '${xivModel.getGuardianDeity}', icon: FFFonts.ItemCategory_Crystal),
-                    ],
+                        CContainer(body: 'Birthday',sub: '${xivModel.getNameDay}', icon: FFFonts.Schedule),
+                        CContainer(body: 'Guardian',sub: '${xivModel.getGuardianDeity}', icon: FFFonts.ItemCategory_Crystal),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

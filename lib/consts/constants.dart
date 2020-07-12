@@ -1,14 +1,13 @@
-import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 import 'package:xiv/consts/f_f_fonts_icons.dart';
 export 'f_f_fonts_icons.dart';
 
-final String kApiKey =
+const String kApiKey =
     '?private_key=dd7264709cc043678c0f79dec7a6325ec4089f637eec45278e083d957d11981c';
-final String kUrl = 'https://xivapi.com/';
-final String kUrlNoDash = 'https://xivapi.com';
-final String kUrlDocs = 'https://xivapi.com/docs';
+const String kUrl = 'https://xivapi.com/';
+const String kUrlNoDash = 'https://xivapi.com';
+const String kUrlDocs = 'https://xivapi.com/docs';
 const String kUrlTwitter = 'https://twitter.com/Federiz';
 
 const kActiveColour = Color.fromRGBO(64, 75, 96, 0.9);
@@ -19,6 +18,7 @@ const kBackgroundColour = Colors.white24;
 const kHeroTagIntroScreen = 'IntroScreenTag';
 const kHeroTagPortrait = 'PortraitTag';
 
+const kRouteErrorScreen = '/Error';
 const kRouteGearScreen = '/Gear';
 const kRouteFreeCompanyScreen = '/FC';
 const kRouteCharacterScreen = '/Character';
@@ -28,6 +28,9 @@ const kRouteIntroScreen = '/';
 const kNullString = 'N/A';
 const kNullInt = 0;
 const kNullList = [];
+
+const kGifBeta = 'https://media.tenor.com/images/1361bfbbf3456b78cefadb1838a0a9b3/tenor.gif';
+const kGifError = 'https://media.tenor.com/images/e9f181ed1a36317d1c4f2059fe3561fb/tenor.gif';
 
 
 const kTextStyleBody = TextStyle(
