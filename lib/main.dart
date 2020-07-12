@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
       builder: (theme, darkTheme) => ChangeNotifierProvider<XIV>(
         create: (_) => XIV(),
         child: MaterialApp(
+          debugShowCheckedModeBanner: false,
           theme: theme,
           darkTheme: darkTheme,
           initialRoute: kRouteIntroScreen,
