@@ -220,6 +220,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       ],
                     ),
                     Flexible(
+//                      fit: FlexFit.tight,
                       child: Center(
                         child: ContainerResponsive(
                           width: double.maxFinite,
