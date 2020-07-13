@@ -35,6 +35,52 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         });
   }
 
+  _showCredits() {
+    Dialog errorDialog = Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+      child: Container(
+        height: 150.0,
+        width: 100.0,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(top: 1.0, bottom: 2.0),
+              child: RichText(
+                text: TextSpan(text: 'This app was made thanks to:', style: kTextStyleBody),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(0.5),
+              child: RichText(
+                text: TextSpan(children: [
+                  WidgetSpan(child: Icon(FFFonts.SquareNo01, size: 15,)),
+                  TextSpan(text: 'Square Enix', style: kTextStyleSub),
+                  TextSpan(text: ', for the game I love.\n'),
+                  WidgetSpan(child: Icon(FFFonts.SquareNo02, size: 15,)),
+                  TextSpan(text: 'The XIVApi team.\n'),
+                  WidgetSpan(child: Icon(FFFonts.SquareNo03, size: 15,)),
+                  TextSpan(text: 'Collette Chrome\'siel for all the support.'),
+                ]),
+              ),
+            ),
+            Padding(padding: EdgeInsets.only(top: 0.0)),
+            FlatButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: RichText(
+                text: WidgetSpan(child: Icon(FFFonts.app_chat_stamp)),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+    showDialog(
+        context: context, builder: (BuildContext context) => errorDialog);
+  }
+
   @override
   void initState() {
     super.initState();
@@ -199,12 +245,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             elevation: 0,
                             child: Row(
                               children: <Widget>[
-                                Icon(FFFonts.SymbolMamet, color: kBackgroundColour,),
-                                Text(' credits', style: TextStyle(color: kBackgroundColour),),
+                                Icon(
+                                  FFFonts.SymbolMamet,
+                                  color: kBackgroundColour,
+                                ),
+                                Text(
+                                  ' credits',
+                                  style: TextStyle(color: kBackgroundColour),
+                                ),
                               ],
                             ),
-
-                            onPressed: () {},
+                            onPressed: _showCredits,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),
