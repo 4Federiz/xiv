@@ -141,7 +141,7 @@ class XIV with ChangeNotifier {
   get getItemID => _item.getItemID;
   get getItemName => _item.getItemName;
   get getItemJob => _item.getItemJob;
-  get getItemIcon => _item.getItemIcon;
+  get getItemIconMainHand => _item.getItemIcon;
   get getItemiLevel => _item.getItemiLevel;
 
   get getPrintableInfo =>
@@ -221,12 +221,12 @@ class XIV with ChangeNotifier {
 //    _gearHands.setMateria =
 //        decoder['Character']['GearSet']['Gear']['Hands']['Materia'];
 //
-//    _gearHead.setCreator =
-//        decoder['Character']['GearSet']['Gear']['Head']['Creator'] ?? kNullString;
-//    _gearHead.setDye = decoder['Character']['GearSet']['Gear']['Head']['Dye'] ?? kNullString;
-//    _gearHead.setID = decoder['Character']['GearSet']['Gear']['Head']['ID'] ?? kNullInt;
-//    _gearHead.setMateria =
-//        decoder['Character']['GearSet']['Gear']['Head']['Materia'] ?? kNullList;
+    _gearHead.setCreator =
+        decoder['Character']['GearSet']['Gear']['Head']['Creator'];
+    _gearHead.setDye = decoder['Character']['GearSet']['Gear']['Head']['Dye'];
+    _gearHead.setID = decoder['Character']['GearSet']['Gear']['Head']['ID'];
+    _gearHead.setMateria =
+        decoder['Character']['GearSet']['Gear']['Head']['Materia'];
 //
 //    _gearLegs.setCreator =
 //        decoder['Character']['GearSet']['Gear']['Legs']['Creator'];
