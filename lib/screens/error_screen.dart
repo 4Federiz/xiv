@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:xiv/consts/constants.dart';
-import 'package:xiv/widgets/clay_dialog.dart';
+import 'package:xiv/controllers/error_interface.dart';
 
 class ErrorScreen extends StatelessWidget {
   @override

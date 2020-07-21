@@ -20,6 +20,7 @@ dependencies:
   flutter_launcher_icons: ^0.7.5
   adaptive_theme: ^0.1.1
   giffy_dialog: ^1.7.0
+  firebase_admob: ^0.9.3+2
 
 flutter_icons:
   android: true

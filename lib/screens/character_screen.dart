@@ -1,9 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
-import 'package:xiv/brains/xiv.dart';
-import 'package:xiv/consts/constants.dart';
-import 'package:xiv/widgets/clay_container.dart';
+import 'package:xiv/controllers/character_interface.dart';
 
 class CharacterScreen extends StatefulWidget {
   @override
@@ -11,7 +6,6 @@ class CharacterScreen extends StatefulWidget {
 }
 
 class _CharacterScreenState extends State<CharacterScreen> {
-
   @override
   Widget build(BuildContext context) {
     final xivModel = Provider.of<XIV>(context);
@@ -26,20 +20,20 @@ class _CharacterScreenState extends State<CharacterScreen> {
     );
 
     Widget freeCompanyCContainer() {
-      if(xivModel.getFreeCompanyName == 'Not enlisted in a FC'){
+      if (xivModel.getFreeCompanyName == 'Not enlisted in a FC') {
         return CContainer(
-            body: 'FreeCompany',
-            sub: '${xivModel.getFreeCompanyName}',
-            icon: FFFonts.app_group,
+          body: 'FreeCompany',
+          sub: '${xivModel.getFreeCompanyName}',
+          icon: FFFonts.app_group,
         );
       } else {
         return CContainer.colour(
-            body: 'FreeCompany',
-            sub: '${xivModel.getFreeCompanyName}',
-            icon: FFFonts.app_group,
-            color: kActiveColourAccent,
-            activeOnPress: true,
-            routeName: kRouteFreeCompanyScreen,
+          body: 'FreeCompany',
+          sub: '${xivModel.getFreeCompanyName}',
+          icon: FFFonts.app_group,
+          color: kActiveColourAccent,
+          activeOnPress: true,
+          routeName: kRouteFreeCompanyScreen,
         );
       }
     }
@@ -78,7 +72,14 @@ class _CharacterScreenState extends State<CharacterScreen> {
                               ),
                             ),
                             Positioned(
-                              child: Icon(kJob[job].icon, size: 30,) ?? Icon(kJob['NoJob'].icon, size: 30,),
+                              child: Icon(
+                                    kJob[job].icon,
+                                    size: 30,
+                                  ) ??
+                                  Icon(
+                                    kJob['NoJob'].icon,
+                                    size: 30,
+                                  ),
                               right: 0,
                               top: 70,
                             ),
@@ -90,10 +91,23 @@ class _CharacterScreenState extends State<CharacterScreen> {
                   SliverList(
                     delegate: SliverChildListDelegate(
                       [
-                        CContainer(body: '${xivModel.getName}',sub: 'Player ID: ${xivModel.getID}', icon: FFFonts.app_character_info),
-                        CContainer(body: 'Biography',sub: '${xivModel.getBio}', icon: FFFonts.app_notification_notices),
+                        CContainer(
+                            body: '${xivModel.getName}',
+                            sub: 'Player ID: ${xivModel.getID}',
+                            icon: FFFonts.app_character_info),
+                        CContainer(
+                            body: 'Biography',
+                            sub: '${xivModel.getBio}',
+                            icon: FFFonts.app_notification_notices),
                         freeCompanyCContainer(),
-                      CContainer.colour(body: 'Gear',sub: '', icon: FFFonts.ArmoryChest, color: kActiveColourAccent, activeOnPress: true, routeName: kRouteGearScreen),
+                        ///TODO: Gear screen. Change this activeOnPress to true when done.
+                        CContainer.colour(
+                            body: 'Gear',
+                            sub: '[Coming soon]',
+                            icon: FFFonts.ArmoryChest,
+                            color: kActiveColourAccent,
+                            activeOnPress: false,
+                            routeName: kRouteGearScreen),
                         Hero(
                           tag: kHeroTagPortrait,
                           child: ContainerResponsive(
@@ -105,8 +119,14 @@ class _CharacterScreenState extends State<CharacterScreen> {
                             ),
                           ),
                         ),
-                        CContainer(body: 'Birthday',sub: '${xivModel.getNameDay}', icon: FFFonts.Schedule),
-                        CContainer(body: 'Guardian',sub: '${xivModel.getGuardianDeity}', icon: FFFonts.ItemCategory_Crystal),
+                        CContainer(
+                            body: 'Birthday',
+                            sub: '${xivModel.getNameDay}',
+                            icon: FFFonts.Schedule),
+                        CContainer(
+                            body: 'Guardian',
+                            sub: '${xivModel.getGuardianDeity}',
+                            icon: FFFonts.ItemCategory_Crystal),
                       ],
                     ),
                   ),

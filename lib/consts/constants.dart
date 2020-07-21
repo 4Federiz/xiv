@@ -32,6 +32,10 @@ const kNullList = [];
 const kGifBeta = 'https://media.tenor.com/images/1361bfbbf3456b78cefadb1838a0a9b3/tenor.gif';
 const kGifError = 'https://media.tenor.com/images/e9f181ed1a36317d1c4f2059fe3561fb/tenor.gif';
 
+const kAdmobIDAndroid = 'ca-app-pub-3737697214462424~2123879196';
+const kAdmobBannerAndroid = 'ca-app-pub-3737697214462424/4558470848';
+const kAdmobIDiOS = ' ';
+const kAdmobBanneriOS = ' ';
 
 const kTextStyleBody = TextStyle(
   color: kActiveColourDim,

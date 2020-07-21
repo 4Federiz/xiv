@@ -1,9 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
-import 'package:xiv/brains/xiv.dart';
-import 'package:xiv/consts/constants.dart';
-import 'package:xiv/widgets/clay_container.dart';
+import 'package:xiv/controllers/freecompany_interface.dart';
 
 class FreeCompanyScreen extends StatefulWidget {
   @override

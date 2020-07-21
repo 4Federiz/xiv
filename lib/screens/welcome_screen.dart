@@ -1,13 +1,7 @@
-import 'dart:convert';
-import 'dart:math';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
-import 'package:xiv/brains/xiv.dart';
-import 'package:xiv/consts/constants.dart';
-import 'package:xiv/widgets/clay_dialog.dart';
-import 'package:xiv/widgets/dropdown_menu.dart';
-import 'package:xiv/widgets/flat_button.dart';
+import 'package:xiv/controllers/welcome_interface.dart';
+
+import 'package:xiv/brains/ads.dart';
+import 'package:firebase_admob/firebase_admob.dart';
 
 class WelcomeScreen extends StatefulWidget {
   UrlHandling json = UrlHandling();
@@ -47,19 +41,33 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             Padding(
               padding: EdgeInsets.only(top: 1.0, bottom: 2.0),
               child: RichText(
-                text: TextSpan(text: 'This app was made thanks to:', style: kTextStyleBody),
+                text: TextSpan(
+                    text: 'This app was made thanks to:',
+                    style: kTextStyleBody),
               ),
             ),
             Padding(
               padding: EdgeInsets.all(0.5),
               child: RichText(
                 text: TextSpan(children: [
-                  WidgetSpan(child: Icon(FFFonts.SquareNo01, size: 15,)),
+                  WidgetSpan(
+                      child: Icon(
+                    FFFonts.SquareNo01,
+                    size: 15,
+                  )),
                   TextSpan(text: 'Square Enix', style: kTextStyleSub),
                   TextSpan(text: ', for the game I love.\n'),
-                  WidgetSpan(child: Icon(FFFonts.SquareNo02, size: 15,)),
+                  WidgetSpan(
+                      child: Icon(
+                    FFFonts.SquareNo02,
+                    size: 15,
+                  )),
                   TextSpan(text: 'The XIVApi team.\n'),
-                  WidgetSpan(child: Icon(FFFonts.SquareNo03, size: 15,)),
+                  WidgetSpan(
+                      child: Icon(
+                    FFFonts.SquareNo03,
+                    size: 15,
+                  )),
                   TextSpan(text: 'Collette Chrome\'siel for all the support.'),
                 ]),
               ),
@@ -85,10 +93,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   void initState() {
     super.initState();
     _showDialog();
+    FirebaseAdMob.instance.initialize(appId: FirebaseAdMob.testAppId);
+    AdMobService.myBanner = AdMobService.buildBannerAd()..load();
   }
 
   @override
   void dispose() {
+    AdMobService.myBanner.dispose();
     super.dispose();
   }
 
@@ -105,6 +116,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     );
 
     void digApi() async {
+
       kLoadingIndicator(context);
 
       dynamic response = await widget.json
@@ -184,7 +196,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       padding: EdgeInsets.only(top: 30),
                       child: TextField(
                         onChanged: (v) {
-                          textFieldValue = v;
+                          ///TODO: Handle empty input.
+                            textFieldValue = v;
                         },
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
@@ -234,64 +247,64 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         ),
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: <Widget>[
-                        ButtonTheme(
-                          height: 1,
-                          minWidth: 5,
-                          child: RaisedButton(
-                            color: Colors.transparent,
-                            elevation: 0,
-                            child: Row(
-                              children: <Widget>[
-                                Icon(
-                                  FFFonts.SymbolMamet,
-                                  color: kBackgroundColour,
-                                ),
-                                Text(
-                                  ' credits',
-                                  style: TextStyle(color: kBackgroundColour),
-                                ),
-                              ],
-                            ),
-                            onPressed: _showCredits,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 5, bottom: 15),
-                          child: RichText(
-                            text: TextSpan(
-                              children: [
-                                TextSpan(
-                                    text: 'Please report bugs ',
-                                    style: TextStyle(
-                                      color: Colors.white24,
-                                    )),
-                                TextSpan(
-                                  text: '@Federiz ',
-                                  style: TextStyle(
-                                    color: kActiveColourAccent,
-                                    decoration: TextDecoration.underline,
-                                  ),
-                                ),
-                                WidgetSpan(
-                                  child: Icon(
-                                    FFFonts.app_drawer_support,
-                                    color: Colors.white24,
-                                    size: 14,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
+//                    Row(
+//                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                      crossAxisAlignment: CrossAxisAlignment.end,
+//                      children: <Widget>[
+//                        ButtonTheme(
+//                          height: 1,
+//                          minWidth: 5,
+//                          child: RaisedButton(
+//                            color: Colors.transparent,
+//                            elevation: 0,
+//                            child: Row(
+//                              children: <Widget>[
+//                                Icon(
+//                                  FFFonts.SymbolMamet,
+//                                  color: kBackgroundColour,
+//                                ),
+//                                Text(
+//                                  '',
+//                                  style: TextStyle(color: kBackgroundColour),
+//                                ),
+//                              ],
+//                            ),
+//                            onPressed: _showCredits,
+//                            shape: RoundedRectangleBorder(
+//                              borderRadius: BorderRadius.circular(10),
+//                            ),
+//                          ),
+//                        ),
+//                        Padding(
+//                          padding: const EdgeInsets.only(right: 5, bottom: 15),
+//                          child: RichText(
+//                            text: TextSpan(
+//                              children: [
+//                                TextSpan(
+//                                    text: 'Please report bugs ',
+//                                    style: TextStyle(
+//                                      color: Colors.white24,
+//                                    )),
+//                                TextSpan(
+//                                  text: '@Federiz ',
+//                                  style: TextStyle(
+//                                    color: kActiveColourAccent,
+//                                    decoration: TextDecoration.underline,
+//                                  ),
+//                                ),
+//                                WidgetSpan(
+//                                  child: Icon(
+//                                    FFFonts.app_drawer_support,
+//                                    color: Colors.white24,
+//                                    size: 14,
+//                                  ),
+//                                )
+//                              ],
+//                            ),
+//                          ),
+//                        ),
+//                      ],
+//                    )
                   ],
                 ),
               ),

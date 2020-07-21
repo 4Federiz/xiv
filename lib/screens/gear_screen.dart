@@ -11,6 +11,7 @@ class GearScreen extends StatefulWidget {
   @override
   _GearScreenState createState() => _GearScreenState();
 }
+
 ///TODO: Handle materia with strings. they come as ints.
 class _GearScreenState extends State<GearScreen> {
   @override
@@ -46,11 +47,11 @@ class _GearScreenState extends State<GearScreen> {
                   children: <Widget>[
                     ClayFlipCard(
                       itemImage: xivModel.getItemIconMainHand,
-                      child:
-                      CContainer.info(
-                          body: '${xivModel.getItemName}',
-                          sub: '-ID: ${xivModel.getGearMainHandID}\n -iLvl: ${xivModel.getItemiLevel}\n-Materia: ${xivModel.getGearMainHandMateriaCount} melds',
-                          icon: FFFonts.Armoury_MainArm,
+                      child: CContainer.info(
+                        body: '${xivModel.getItemName}',
+                        sub:
+                            '-ID: ${xivModel.getGearMainHandID}\n -iLvl: ${xivModel.getItemiLevel}\n-Materia: ${xivModel.getGearMainHandMateriaCount} melds',
+                        icon: FFFonts.Armoury_MainArm,
                       ),
                     ),
 //                    Image.network(xivHead.getItemIcon,),

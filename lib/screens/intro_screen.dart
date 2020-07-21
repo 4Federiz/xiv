@@ -1,6 +1,4 @@
-import 'dart:async';
-import 'package:flutter/material.dart';
-import 'package:xiv/consts/constants.dart';
+import 'package:xiv/controllers/intro_interface.dart';
 
 class IntroScreen extends StatelessWidget {
   @override
